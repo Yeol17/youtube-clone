@@ -3,18 +3,26 @@ import './Header.scss';
 // 아이콘
 import { AiOutlineMenu, AiOutlineMore } from "react-icons/ai";
 import { MdMic, MdTranslate, MdOutlineKeyboardAlt, MdOutlineAdminPanelSettings } from "react-icons/md";
-import { SlMagnifier, SlQuestion, SlArrowRight } from "react-icons/sl";
+import { SlMagnifier, SlQuestion } from "react-icons/sl";
 import { CiGlobe } from "react-icons/ci";
 import { VscAccount } from "react-icons/vsc";
 import { IoSettingsOutline } from "react-icons/io5";
 import { BsSendExclamation } from "react-icons/bs";
 import { RiShieldUserLine, RiMoonLine } from "react-icons/ri";
 
+//hooks
+import { useRef, useState } from 'react';
+
 // 컴포넌트
 import MainMenu from './MainMenu';
 import LoginBtn from '../LoginBtn';
+import SubMenu from './SubMenu';
 
 export default function Header() {
+
+  let [settingMain, setSettingMain] = useState(false);
+  let [settingSub, setSubMenu] = useState('defualt');
+
   return (
     <>
       <header>
@@ -47,11 +55,14 @@ export default function Header() {
           <div className="end">
             <div className="settings">
 
-              <button type="button" className="btn--setting">
+              <button type="button" onClick={() => {
+                setSettingMain(!settingMain)
+              }} className="btn--setting">
                 <AiOutlineMore />
               </button>
-              
-              <MainMenu settings={settings} />
+
+              {settingMain && <MainMenu settings={settings} />}
+              <SubMenu />
 
             </div>
 
@@ -67,14 +78,14 @@ export default function Header() {
 
 const settings = [
   [
-    { id: 0, title: 'Youtube의 내 테이터',icn: <RiShieldUserLine />, more: false }
+    { id: 0, title: 'Youtube의 내 테이터', icn: <RiShieldUserLine />, more: false }
   ],
   [
-    { id: 1, title: '디자인: 기기 테마', icn: <RiMoonLine/>, more: true },
-    { id: 2, title: '언어: 한국어', icn: <MdTranslate/>, more: true },
-    { id: 3, title: '제한 모드: 사용 안함', icn: <MdOutlineAdminPanelSettings/>, more: true },
-    { id: 4, title: '위치: 한국', icn: <CiGlobe/>, more: true },
-    { id: 5, title: '단축키', icn: <MdOutlineKeyboardAlt/>, more: true },
+    { id: 1, title: '디자인: 기기 테마', icn: <RiMoonLine />, more: true },
+    { id: 2, title: '언어: 한국어', icn: <MdTranslate />, more: true },
+    { id: 3, title: '제한 모드: 사용 안함', icn: <MdOutlineAdminPanelSettings />, more: true },
+    { id: 4, title: '위치: 한국', icn: <CiGlobe />, more: true },
+    { id: 5, title: '단축키', icn: <MdOutlineKeyboardAlt />, more: true },
   ],
   [
     { id: 6, title: '설정', icn: <IoSettingsOutline />, more: false }

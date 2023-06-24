@@ -1,3 +1,5 @@
+import './LoginBtn.scss'
+
 export default function LoginBtn({ icn }) {
   return (
     <div className="login">

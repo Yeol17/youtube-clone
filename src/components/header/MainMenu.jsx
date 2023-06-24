@@ -1,4 +1,5 @@
 import MenuList from './MenuList'
+import './MainMenu.scss'
 
 export default function MainMenu({ settings }) {
   return (
