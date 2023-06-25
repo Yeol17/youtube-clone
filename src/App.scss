@@ -1,4 +1,7 @@
 @import 'reset';
+// .App {
+//   overflow-y: scroll;
+// }
 
 body {
   font: {
@@ -9,4 +12,20 @@ body {
 button {
   all: unset;
   cursor: pointer;
+}
+
+/* 스크롤바 가로 사이즈 */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+/* 스크롤바 막대기 */
+::-webkit-scrollbar-thumb {
+  background-color: #999;
+}
+
+/* 스크롤바 백그라운드 */
+::-webkit-scrollbar-track {
+  // overflow: hidden;
+  border-radius: 0 8px 8px 0;
 }

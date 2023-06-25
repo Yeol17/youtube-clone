@@ -1,9 +1,14 @@
+import { useEffect } from 'react';
 import './SubMenu.scss'
 
 import { BsCheck2, BsArrowLeftShort } from 'react-icons/bs';
 
 export default function SubMenu({ settingSubType, onClickBackward }) {
   let title, desc, contents;
+
+  useEffect(() => {
+
+  }, [])
 
   if (settingSubType === 'theme') {
     title = design.title;
@@ -16,24 +21,34 @@ export default function SubMenu({ settingSubType, onClickBackward }) {
         </div>
       )
     })
-  } else if(settingSubType === 'langs') {
-    
+  } else if (settingSubType === 'langs') {
+    title = '언어 선택';
+    desc = '';
+    contents = languages.map(lang => {
+      return (
+        <div className="content" key={lang.id}>
+          <div className="icn">{lang.isSelected && <BsCheck2 />}</div>
+          <div className="type">{lang.langs}</div>
+        </div>
+      )
+    });
   }
 
   return (
-    <ul className="sub-menu">
-      <li className="title">
-        <div className="icn" onClick={() =>{
-          onClickBackward('settingMain')
-        }
-        }><BsArrowLeftShort /></div>
-        <h5 className="text">{title}</h5>
-      </li>
-      <li className="contents">
-        <p>{desc}</p>
-        {contents}
-      </li>
-    </ul>
+    <div className="wrapper">
+      <ul className="sub-menu" style={settingSubType === 'langs' ? { top: 0 } : null}>
+        <li className="title">
+          <div className="icn--backward" onClick={() => {
+            onClickBackward('settingMain')
+          }}><BsArrowLeftShort /></div>
+          <h5 className="text">{title}</h5>
+        </li>
+        <li className="contents">
+          {desc && <p>{desc}</p>}
+          {contents}
+        </li>
+      </ul>
+    </div>
   )
 }
 
