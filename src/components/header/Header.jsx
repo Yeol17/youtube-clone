@@ -11,7 +11,7 @@ import { BsSendExclamation } from "react-icons/bs";
 import { RiShieldUserLine, RiMoonLine } from "react-icons/ri";
 
 //hooks
-import { useRef, useState } from 'react';
+import { useState } from 'react';
 
 // 컴포넌트
 import MainMenu from './MainMenu';
@@ -21,7 +21,19 @@ import SubMenu from './SubMenu';
 export default function Header() {
 
   let [settingMain, setSettingMain] = useState(false);
-  let [settingSub, setSubMenu] = useState('defualt');
+  let [settingSubType, setSettingSubType] = useState('');
+
+  const onClickMenu = (type) => {
+    setSettingSubType(type);
+    setSettingMain(false);
+  }
+  const onClickBackward = (v) => {
+    if(v === 'settingMain') {
+      setSettingSubType('');
+      setSettingMain(true);
+
+    }
+  }
 
   return (
     <>
@@ -61,8 +73,8 @@ export default function Header() {
                 <AiOutlineMore />
               </button>
 
-              {settingMain && <MainMenu settings={settings} />}
-              <SubMenu />
+              {settingMain && <MainMenu settings={settings} onClickMenu={onClickMenu} />}
+              {settingSubType && <SubMenu settingSubType={settingSubType} onClickBackward={onClickBackward}/>}
 
             </div>
 
@@ -78,17 +90,17 @@ export default function Header() {
 
 const settings = [
   [
-    { id: 0, title: 'Youtube의 내 테이터', icn: <RiShieldUserLine />, more: false }
+    { id: 0, title: 'Youtube의 내 테이터', icn: <RiShieldUserLine />, more: false, link: '/' }
   ],
   [
-    { id: 1, title: '디자인: 기기 테마', icn: <RiMoonLine />, more: true },
-    { id: 2, title: '언어: 한국어', icn: <MdTranslate />, more: true },
-    { id: 3, title: '제한 모드: 사용 안함', icn: <MdOutlineAdminPanelSettings />, more: true },
-    { id: 4, title: '위치: 한국', icn: <CiGlobe />, more: true },
-    { id: 5, title: '단축키', icn: <MdOutlineKeyboardAlt />, more: true },
+    { id: 1, title: '디자인: 기기 테마', icn: <RiMoonLine />, more: true, type: 'theme' },
+    { id: 2, title: '언어: 한국어', icn: <MdTranslate />, more: true, type: 'langs' },
+    { id: 3, title: '제한 모드: 사용 안함', icn: <MdOutlineAdminPanelSettings />, more: true, type: 'restrict' },
+    { id: 4, title: '위치: 한국', icn: <CiGlobe />, more: true, type: 'location' },
+    { id: 5, title: '단축키', icn: <MdOutlineKeyboardAlt />, more: false },
   ],
   [
-    { id: 6, title: '설정', icn: <IoSettingsOutline />, more: false }
+    { id: 6, title: '설정', icn: <IoSettingsOutline />, more: false, link: '/'}
   ],
   [
     { id: 7, title: '고객센터', icn: <SlQuestion />, more: false },
