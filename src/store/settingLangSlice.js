@@ -1,70 +1,9 @@
-import { useEffect } from 'react';
-import './SubMenu.scss'
+import { createSlice } from "@reduxjs/toolkit";
 
-import { BsCheck2, BsArrowLeftShort } from 'react-icons/bs';
-
-export default function SubMenu({ settingSubType, onClickBackward }) {
-  let title, desc, contents;
-
-  useEffect(() => {
-
-  }, [])
-
-  if (settingSubType === 'theme') {
-    title = design.title;
-    desc = design.desc;
-    contents = design.contents.map(content => {
-      return (
-        <div className="content" key={content.id}>
-          <div className="icn">{content.isSelected && <BsCheck2 />}</div>
-          <div className="type">{content.type}</div>
-        </div>
-      )
-    })
-  } else if (settingSubType === 'langs') {
-    title = '언어 선택';
-    desc = '';
-    contents = languages.map(lang => {
-      return (
-        <div className="content" key={lang.id}>
-          <div className="icn">{lang.isSelected && <BsCheck2 />}</div>
-          <div className="type">{lang.langs}</div>
-        </div>
-      )
-    });
-  }
-
-  return (
-    <div className="wrapper">
-      <ul className="sub-menu" style={settingSubType === 'langs' ? { top: 0 } : null}>
-        <li className="title">
-          <div className="icn--backward" onClick={() => {
-            onClickBackward('settingMain')
-          }}><BsArrowLeftShort /></div>
-          <h5 className="text">{title}</h5>
-        </li>
-        <li className="contents">
-          {desc && <p>{desc}</p>}
-          {contents}
-        </li>
-      </ul>
-    </div>
-  )
-}
-
-const design = {
-  title: '디자인',
-  theme: '기기 테마',
-  desc: '이 브라우저에서만 설정이 적용됩니다.',
+const languages = {
+  title: '언어 선택',
+  selected: '한국어',
   contents: [
-    { id: 0, type: '기기 테마', isSelected: true },
-    { id: 1, type: '어두운 테마', isSelected: false },
-    { id: 2, type: '밝은 테마', isSelected: false },
-  ]
-}
-
-const languages = [
-
   { id: 0, langs: 'Afrikaans', isSelected: false },
   { id: 1, langs: 'Azərbaycan', isSelected: false },
   { id: 2, langs: 'Bahasa Indonesia', isSelected: false },
@@ -150,3 +89,18 @@ const languages = [
   { id: 82, langs: '한국어', isSelected: true },
 
 ]
+};
+
+const language = createSlice({
+  name: 'settingLanguage',
+  initialState: languages,
+  reducers: {
+    changeLang(state, action){
+      state.selected = action.payload.langs
+    }
+  }
+
+});
+
+export const { changeLang } = language.actions;
+export default language;

@@ -2,42 +2,41 @@ import './Header.scss';
 
 // 아이콘
 import { AiOutlineMenu, AiOutlineMore } from "react-icons/ai";
-import { MdMic, MdTranslate, MdOutlineKeyboardAlt, MdOutlineAdminPanelSettings } from "react-icons/md";
-import { SlMagnifier, SlQuestion } from "react-icons/sl";
-import { CiGlobe } from "react-icons/ci";
+import { MdMic } from "react-icons/md";
+import { SlMagnifier } from "react-icons/sl";
 import { VscAccount } from "react-icons/vsc";
-import { IoSettingsOutline } from "react-icons/io5";
-import { BsSendExclamation } from "react-icons/bs";
-import { RiShieldUserLine, RiMoonLine } from "react-icons/ri";
 
 //hooks
 import { useState } from 'react';
+import { useSelector } from 'react-redux';
 
 // 컴포넌트
-import MainMenu from './MainMenu';
+import SettingMain from './SettingMain';
+import SettingSub from './SettingSub';
 import LoginBtn from '../LoginBtn';
-import SubMenu from './SubMenu';
 
 export default function Header() {
+  let theme = useSelector(state => state.theme);
+  let langs = useSelector(state => state.langs)
 
   let [settingMain, setSettingMain] = useState(false);
   let [settingSubType, setSettingSubType] = useState('');
+  let [isLimited, setIsLimited] = useState(false);
 
-  const onClickMenu = (type) => {
-    setSettingSubType(type);
+  const onClickMenu = (more) => {
+    setSettingSubType(more);
     setSettingMain(false);
   }
   const onClickBackward = (v) => {
-    if(v === 'settingMain') {
+    if (v === 'settingMain') {
       setSettingSubType('');
       setSettingMain(true);
-
     }
   }
 
   return (
     <>
-      <header>
+      <header className='header'>
         <div className="container">
           <div className="start">
             <button type="button" className="menu-ico">
@@ -73,8 +72,8 @@ export default function Header() {
                 <AiOutlineMore />
               </button>
 
-              {settingMain && <MainMenu settings={settings} onClickMenu={onClickMenu} />}
-              {settingSubType && <SubMenu settingSubType={settingSubType} onClickBackward={onClickBackward}/>}
+              {settingMain && <SettingMain langs={langs} theme={theme} onClickMenu={onClickMenu} isLimited={isLimited}/>}
+              {settingSubType && <SettingSub setSettingSubType={setSettingSubType} settingSubType={settingSubType} onClickBackward={onClickBackward} isLimited={isLimited}/>}
 
             </div>
 
@@ -88,22 +87,3 @@ export default function Header() {
   )
 }
 
-const settings = [
-  [
-    { id: 0, title: 'Youtube의 내 테이터', icn: <RiShieldUserLine />, more: false, link: '/' }
-  ],
-  [
-    { id: 1, title: '디자인: 기기 테마', icn: <RiMoonLine />, more: true, type: 'theme' },
-    { id: 2, title: '언어: 한국어', icn: <MdTranslate />, more: true, type: 'langs' },
-    { id: 3, title: '제한 모드: 사용 안함', icn: <MdOutlineAdminPanelSettings />, more: true, type: 'restrict' },
-    { id: 4, title: '위치: 한국', icn: <CiGlobe />, more: true, type: 'location' },
-    { id: 5, title: '단축키', icn: <MdOutlineKeyboardAlt />, more: false },
-  ],
-  [
-    { id: 6, title: '설정', icn: <IoSettingsOutline />, more: false, link: '/'}
-  ],
-  [
-    { id: 7, title: '고객센터', icn: <SlQuestion />, more: false },
-    { id: 8, title: '의견 보내기', icn: <BsSendExclamation />, more: false }
-  ]
-]
