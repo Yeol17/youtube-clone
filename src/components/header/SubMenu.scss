@@ -1,16 +1,16 @@
 .sub-menu {
   position: absolute;
   right: 0;
-  width: 280px;
+  width: 300px;
   max-height: 98vh;
-  border-radius: 20px;
+  border-radius: 12px;
   box-shadow: 0 0 12px 0 rgba(125, 125, 125, .3);
   background-color: #fff;
   overflow: auto;
 
 
 
-  &:hover {
+  &.langs:hover {
     overflow-y: scroll;
   }
 
@@ -47,9 +47,9 @@
   .contents {
     display: flex;
     flex-direction: column;
-    padding: 10px 0;
+    padding: 10px 4px;
 
-    p {
+    .desc {
       font-size: .8rem;
       color: #666;
       height: 40px;
@@ -62,9 +62,62 @@
       display: flex;
       padding: 0 10px;
       cursor: pointer;
-
+      
       &:hover {
         background-color: #f1f1f1;
+      }
+    }
+
+    .content.limit {
+      flex-direction: column;
+      margin: 10px 0;
+      &:hover {
+        background: none;
+      }
+      
+      .limit-desc1 {
+        width: 100%;
+        line-height: 1.2rem;
+        margin-bottom: 16px;
+      }
+
+      .limit-desc2 {
+        display: flex;
+        width: 100%;
+
+        .caption {
+          flex: 4;
+        }
+        .toggleMode {
+          position: relative;
+          width: 100%;
+          flex: 1;
+          display: flex;
+
+          .bar {
+            width: 35px;
+            height: 14px;
+            background: #d1d1d1;
+            border-radius: 10px;
+            position: absolute;
+          }
+          
+          .btn {
+            width: 20px;
+            height: 20px;
+            border-radius: 10px;
+            background-color: #333;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            box-shadow: 1px 1px 8px 2px rgba(125, 125, 125, .3);
+            transition: transform .3s linear;
+          }
+          .btn.active {
+            background-color: #065fd4;
+            transform: translate(80%,-50%)
+          }
+        }
       }
     }
 

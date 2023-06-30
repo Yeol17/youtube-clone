@@ -16,12 +16,15 @@ import SettingSub from './SettingSub';
 import LoginBtn from '../LoginBtn';
 
 export default function Header() {
+  
   let theme = useSelector(state => state.theme);
-  let langs = useSelector(state => state.langs)
+  let langs = useSelector(state => state.langs);
+  let limit = useSelector(state => state.limit);
 
+  console.log(limit);
+  
   let [settingMain, setSettingMain] = useState(false);
   let [settingSubType, setSettingSubType] = useState('');
-  let [isLimited, setIsLimited] = useState(false);
 
   const onClickMenu = (more) => {
     setSettingSubType(more);
@@ -72,8 +75,8 @@ export default function Header() {
                 <AiOutlineMore />
               </button>
 
-              {settingMain && <SettingMain langs={langs} theme={theme} onClickMenu={onClickMenu} isLimited={isLimited}/>}
-              {settingSubType && <SettingSub setSettingSubType={setSettingSubType} settingSubType={settingSubType} onClickBackward={onClickBackward} isLimited={isLimited}/>}
+              {settingMain && <SettingMain limit={limit} langs={langs} theme={theme} onClickMenu={onClickMenu} />}
+              {settingSubType && <SettingSub setSettingSubType={setSettingSubType} settingSubType={settingSubType} onClickBackward={onClickBackward} limit={limit} />}
 
             </div>
 
