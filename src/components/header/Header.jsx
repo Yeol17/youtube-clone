@@ -16,13 +16,12 @@ import SettingSub from './SettingSub';
 import LoginBtn from '../LoginBtn';
 
 export default function Header() {
-  
+
   let theme = useSelector(state => state.theme);
   let langs = useSelector(state => state.langs);
   let limit = useSelector(state => state.limit);
+  let location = useSelector(state => state.location);
 
-  console.log(limit);
-  
   let [settingMain, setSettingMain] = useState(false);
   let [settingSubType, setSettingSubType] = useState('');
 
@@ -75,8 +74,24 @@ export default function Header() {
                 <AiOutlineMore />
               </button>
 
-              {settingMain && <SettingMain limit={limit} langs={langs} theme={theme} onClickMenu={onClickMenu} />}
-              {settingSubType && <SettingSub setSettingSubType={setSettingSubType} settingSubType={settingSubType} onClickBackward={onClickBackward} limit={limit} />}
+              {settingMain &&
+                <SettingMain
+                  location={location}
+                  limit={limit}
+                  langs={langs}
+                  theme={theme}
+                  onClickMenu={onClickMenu}
+                />}
+              {settingSubType &&
+                <SettingSub
+                  setSettingSubType={setSettingSubType}
+                  settingSubType={settingSubType}
+                  onClickBackward={onClickBackward}
+                  langs={langs}
+                  theme={theme}
+                  limit={limit}
+                  location={location}
+                />}
 
             </div>
 

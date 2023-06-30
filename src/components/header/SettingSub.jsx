@@ -1,19 +1,17 @@
 import './SubMenu.scss'
 import { BsCheck2, BsArrowLeftShort } from 'react-icons/bs';
 
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { changeTheme } from '../../store/settingThemeSlice'
 import { changeLang } from '../../store/settingLangSlice'
 import { changeLimited } from '../../store/settingLimitSlice'
+import { changeLocation } from '../../store/settingLocationSlice'
 
 
-export default function SubMenu({ settingSubType, onClickBackward, setSettingSubType, isLimited }) {
+export default function SubMenu({ settingSubType, onClickBackward, setSettingSubType, theme, langs, limit, location }) {
   let title, desc, contents;
   let dispatch = useDispatch();
-  let theme = useSelector(state => state.theme);
-  let langs = useSelector(state => state.langs);
-  let limit = useSelector(state => state.limit);
-  
+
   if (settingSubType === 'theme') {
     title = theme.title;
     desc = theme.desc;
@@ -28,8 +26,7 @@ export default function SubMenu({ settingSubType, onClickBackward, setSettingSub
         </div>
       )
     })
-  }
-  else if (settingSubType === 'langs') {
+  } else if (settingSubType === 'langs') {
     title = langs.title;
     desc = '';
     contents = langs.contents.map(lang => {
@@ -53,7 +50,10 @@ export default function SubMenu({ settingSubType, onClickBackward, setSettingSub
       <div className="limit-desc2">
         <div className="caption">제한 모드 활성화</div>
         <div className="toggleMode" onClick={() => {
-          dispatch(changeLimited())
+          dispatch(changeLimited());
+          setTimeout(() => {
+            setSettingSubType('');
+          }, 800)
         }}>
           <div className="bar"></div>
           <div className={limit.isLimited ? 'btn active' : 'btn'}></div>
@@ -62,11 +62,25 @@ export default function SubMenu({ settingSubType, onClickBackward, setSettingSub
         {limit.isLimit && <p>이 브라우저에서 제한모드 잠금</p>}
       </div>
     </div>
+  } else if (settingSubType === 'location') {
+    title = location.title;
+    desc = '';
+    contents = location.contents.map(loc => {
+      return (
+        <div className="content" onClick={() => {
+          dispatch(changeLocation(loc));
+          setSettingSubType('');
+        }} key={loc.id}>
+          <div className="icn">{location.selected === loc.location && <BsCheck2 />}</div>
+          <div className="type">{loc.location}</div>
+        </div>
+      )
+    })
   }
 
   return (
     <div className="wrapper">
-      <ul className={'sub-menu ' + settingSubType} style={settingSubType === 'langs' ? { top: 0 } : null}>
+      <ul className={'sub-menu ' + settingSubType} style={settingSubType === 'langs' || 'location' ? { top: 0 } : null}>
         <li className="title">
           <div className="icn--backward" onClick={() => {
             onClickBackward('settingMain')

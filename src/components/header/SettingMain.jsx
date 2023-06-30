@@ -9,7 +9,7 @@ import './MainMenu.scss'
 import MenuItem from './MenuItem';
 
 
-export default function SettingMain({ theme, langs, onClickMenu, limit }) {
+export default function SettingMain({ theme, langs, onClickMenu, limit, location }) {
   
   return (
     <ul className="main-menu">
@@ -23,7 +23,7 @@ export default function SettingMain({ theme, langs, onClickMenu, limit }) {
           <MenuItem itm={settings[1]} itmVal={theme.selected} onClickMenu={onClickMenu}/>
           <MenuItem itm={settings[2]} itmVal={langs.selected} onClickMenu={onClickMenu}/>
           <MenuItem itm={settings[3]} itmVal={limit.isLimited ? '사용 중': '사용 안함'} onClickMenu={onClickMenu}/>
-          <MenuItem itm={settings[4]} onClickMenu={onClickMenu}/>
+          <MenuItem itm={settings[4]} itmVal={location.selected}onClickMenu={onClickMenu}/>
           <MenuItem itm={settings[5]} />
         </div>
       </li>
