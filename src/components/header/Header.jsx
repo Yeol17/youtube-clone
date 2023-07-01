@@ -24,6 +24,7 @@ export default function Header() {
 
   let [settingMain, setSettingMain] = useState(false);
   let [settingSubType, setSettingSubType] = useState('');
+  let [mode, setMode] = useState(false);
 
   const onClickMenu = (more) => {
     setSettingSubType(more);
@@ -34,6 +35,9 @@ export default function Header() {
       setSettingSubType('');
       setSettingMain(true);
     }
+  }
+  const onClickModeChange = (v) => {
+    setMode(v);
   }
 
   return (
@@ -87,10 +91,12 @@ export default function Header() {
                   setSettingSubType={setSettingSubType}
                   settingSubType={settingSubType}
                   onClickBackward={onClickBackward}
+                  onClickModeChange={onClickModeChange}
                   langs={langs}
                   theme={theme}
                   limit={limit}
                   location={location}
+                  mode={mode}
                 />}
 
             </div>

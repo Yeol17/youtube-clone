@@ -6,9 +6,21 @@ import { changeTheme } from '../../store/settingThemeSlice'
 import { changeLang } from '../../store/settingLangSlice'
 import { changeLimited } from '../../store/settingLimitSlice'
 import { changeLocation } from '../../store/settingLocationSlice'
+import { useState } from 'react';
 
 
-export default function SubMenu({ settingSubType, onClickBackward, setSettingSubType, theme, langs, limit, location }) {
+export default function SubMenu({
+  settingSubType,
+  onClickBackward,
+  onClickModeChange,
+  setSettingSubType,
+  theme,
+  langs,
+  limit,
+  location,
+  mode
+}) {
+
   let title, desc, contents;
   let dispatch = useDispatch();
 
@@ -41,7 +53,7 @@ export default function SubMenu({ settingSubType, onClickBackward, setSettingSub
       )
     });
   } else if (settingSubType === 'limit') {
-    title = '제한 모드';
+    title = limit.title;
     desc = '';
     contents = <div className="content limit">
       <p className="limit-desc1">이 모드를 사용하면 미성년자에게 부적합할 수 있는 동영상을 숨길 수 있습니다.
@@ -53,13 +65,18 @@ export default function SubMenu({ settingSubType, onClickBackward, setSettingSub
           dispatch(changeLimited());
           setTimeout(() => {
             setSettingSubType('');
+            onClickModeChange(!mode)
           }, 800)
         }}>
           <div className="bar"></div>
           <div className={limit.isLimited ? 'btn active' : 'btn'}></div>
         </div>
-        {limit.isLimit && <p>제한 모드 잠금을 사용하면 다른 사용자가 이 브라우저에서 제한 모드 설정을 변경할 수 없습니다.</p>}
-        {limit.isLimit && <p>이 브라우저에서 제한모드 잠금</p>}
+      </div>
+      <div className="limit-desc3">
+        {mode && <div>
+          <p>제한 모드 잠금을 사용하면 다른 사용자가 이 브라우저에서 제한 모드 설정을 변경할 수 없습니다.</p>
+          <p className="mt16">이 브라우저에서 제한모드 잠금</p>
+        </div>}
       </div>
     </div>
   } else if (settingSubType === 'location') {
@@ -80,7 +97,7 @@ export default function SubMenu({ settingSubType, onClickBackward, setSettingSub
 
   return (
     <div className="wrapper">
-      <ul className={'sub-menu ' + settingSubType} style={settingSubType === 'langs' || 'location' ? { top: 0 } : null}>
+      <ul className={'sub-menu ' + settingSubType} style={settingSubType === ('langs' || 'location') ? { top: 0 } : null}>
         <li className="title">
           <div className="icn--backward" onClick={() => {
             onClickBackward('settingMain')
