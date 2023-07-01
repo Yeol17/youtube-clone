@@ -6,8 +6,6 @@ import { changeTheme } from '../../store/settingThemeSlice'
 import { changeLang } from '../../store/settingLangSlice'
 import { changeLimited } from '../../store/settingLimitSlice'
 import { changeLocation } from '../../store/settingLocationSlice'
-import { useState } from 'react';
-
 
 export default function SubMenu({
   settingSubType,
@@ -97,7 +95,7 @@ export default function SubMenu({
 
   return (
     <div className="wrapper">
-      <ul className={'sub-menu ' + settingSubType} style={settingSubType === ('langs' || 'location') ? { top: 0 } : null}>
+      <ul className={'sub-menu ' + settingSubType} style={['langs', 'location'].includes(settingSubType) ? { top: 0 } : null}>
         <li className="title">
           <div className="icn--backward" onClick={() => {
             onClickBackward('settingMain')
