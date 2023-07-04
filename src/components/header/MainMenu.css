@@ -1,0 +1,85 @@
+.main-menu {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  position: absolute;
+  right: 0;
+  top: 40px;
+  width: 300px;
+  height: 426px;
+  border-radius: 10px;
+  box-shadow: 0 0 15px 0 rgba(125, 125, 125, 0.2);
+}
+.main-menu ul {
+  width: 100%;
+}
+.main-menu li {
+  display: flex;
+}
+.main-menu .section1,
+.main-menu .section2,
+.main-menu .section3,
+.main-menu .section4 {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 8px 0;
+}
+.main-menu .section1 .section-container,
+.main-menu .section2 .section-container,
+.main-menu .section3 .section-container,
+.main-menu .section4 .section-container {
+  width: 100%;
+}
+.main-menu .section1 .section-container .itm,
+.main-menu .section2 .section-container .itm,
+.main-menu .section3 .section-container .itm,
+.main-menu .section4 .section-container .itm {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  box-sizing: border-box;
+  cursor: pointer;
+}
+.main-menu .section1 .section-container .itm:hover,
+.main-menu .section2 .section-container .itm:hover,
+.main-menu .section3 .section-container .itm:hover,
+.main-menu .section4 .section-container .itm:hover {
+  background-color: #f1f1f1;
+}
+.main-menu .section1 .section-container .itm .icn,
+.main-menu .section2 .section-container .itm .icn,
+.main-menu .section3 .section-container .itm .icn,
+.main-menu .section4 .section-container .itm .icn {
+  display: flex;
+  width: 40px;
+  height: 40px;
+  font-size: 1.2rem;
+  justify-content: center;
+  align-items: center;
+  margin: 0 10px;
+}
+.main-menu .section1 .section-container .itm .text,
+.main-menu .section2 .section-container .itm .text,
+.main-menu .section3 .section-container .itm .text,
+.main-menu .section4 .section-container .itm .text {
+  width: 100%;
+  height: 30px;
+  line-height: 30px;
+  margin-left: 10px;
+}
+.main-menu .section1 .section-container .itm .more,
+.main-menu .section2 .section-container .itm .more,
+.main-menu .section3 .section-container .itm .more,
+.main-menu .section4 .section-container .itm .more {
+  width: 40px;
+  font-size: 0.8rem;
+}
+.main-menu .section1,
+.main-menu .section2,
+.main-menu .section3 {
+  width: 100%;
+  border-bottom: 1px solid #d1d1d1;
+}
+.main-menu .sec4 {
+  width: 100%;
+}/*# sourceMappingURL=MainMenu.css.map */

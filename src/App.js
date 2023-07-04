@@ -1,14 +1,18 @@
 import './App.scss';
 import Header from './components/header/Header'
-import { Provider } from 'react-redux';
-import { store } from './store'
+import Modal from './components/dialog/Modal'
+import { useSelector } from 'react-redux';
+
 function App() {
+
+  let popUp = useSelector(state => state.popUp);
+
   return (
-    <Provider store={store}>
-      <div className="App">
-        <Header />
-      </div>
-    </Provider>
+    <div className="App">
+      <Header />
+      {popUp.shortcutOpend && <Modal />}
+    </div>
+
   );
 }
 

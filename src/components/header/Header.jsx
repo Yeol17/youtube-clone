@@ -16,7 +16,7 @@ import SettingSub from './SettingSub';
 import LoginBtn from '../LoginBtn';
 
 export default function Header() {
-
+  
   let theme = useSelector(state => state.theme);
   let langs = useSelector(state => state.langs);
   let limit = useSelector(state => state.limit);
@@ -85,6 +85,7 @@ export default function Header() {
                   langs={langs}
                   theme={theme}
                   onClickMenu={onClickMenu}
+                  setSettingMain={setSettingMain}
                 />}
               {settingSubType &&
                 <SettingSub

@@ -7,10 +7,20 @@ import { SlQuestion } from "react-icons/sl";
 import { CiGlobe } from "react-icons/ci";
 import './MainMenu.scss'
 import MenuItem from './MenuItem';
+import { useDispatch } from "react-redux";
+import { shortcutChange } from '../../store/popUpStateSlice'
 
+export default function SettingMain({
+  theme,
+  langs,
+  onClickMenu,
+  limit,
+  location,
+  setSettingMain
+}) {
 
-export default function SettingMain({ theme, langs, onClickMenu, limit, location }) {
-  
+  const dispatch = useDispatch();
+
   return (
     <ul className="main-menu">
       <li className="section1">
@@ -20,11 +30,14 @@ export default function SettingMain({ theme, langs, onClickMenu, limit, location
       </li>
       <li className="section2">
         <div className='section-container'>
-          <MenuItem itm={settings[1]} itmVal={theme.selected} onClickMenu={onClickMenu}/>
-          <MenuItem itm={settings[2]} itmVal={langs.selected} onClickMenu={onClickMenu}/>
-          <MenuItem itm={settings[3]} itmVal={limit.isLimited ? '사용 중': '사용 안함'} onClickMenu={onClickMenu}/>
-          <MenuItem itm={settings[4]} itmVal={location.selected}onClickMenu={onClickMenu}/>
-          <MenuItem itm={settings[5]} />
+          <MenuItem itm={settings[1]} itmVal={theme.selected} onClickMenu={onClickMenu} />
+          <MenuItem itm={settings[2]} itmVal={langs.selected} onClickMenu={onClickMenu} />
+          <MenuItem itm={settings[3]} itmVal={limit.isLimited ? '사용 중' : '사용 안함'} onClickMenu={onClickMenu} />
+          <MenuItem itm={settings[4]} itmVal={location.selected} onClickMenu={onClickMenu} />
+          <MenuItem itm={settings[5]} onClickMenu={() => {
+            setSettingMain(false);
+            dispatch(shortcutChange());
+          }} />
         </div>
       </li>
       <div className="section3">

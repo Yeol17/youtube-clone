@@ -1,0 +1,115 @@
+@charset "UTF-8";
+html,
+body,
+div,
+span,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+a,
+address,
+img,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+footer,
+header,
+nav,
+section,
+audio,
+video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+/* HTML5 display-role reset for older browsers */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+  display: block;
+}
+
+body {
+  line-height: 1;
+}
+
+ol,
+ul {
+  list-style: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+div {
+  box-sizing: border-box;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+body {
+  font-size: 14px;
+}
+
+button {
+  all: unset;
+  cursor: pointer;
+}
+
+/* 스크롤바 가로 사이즈 */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+/* 스크롤바 막대기 */
+::-webkit-scrollbar-thumb {
+  background-color: #999;
+}
+
+/* 스크롤바 백그라운드 */
+::-webkit-scrollbar-track {
+  border-radius: 0 8px 8px 0;
+}/*# sourceMappingURL=App.css.map */

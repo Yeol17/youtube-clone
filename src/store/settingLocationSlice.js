@@ -121,6 +121,7 @@ const location = createSlice({
   initialState: locations,
   reducers: {
     changeLocation(state, action) {
+      console.log(action);
       state.selected = action.payload.location
     }
   }

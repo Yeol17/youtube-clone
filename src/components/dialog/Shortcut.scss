@@ -1,0 +1,82 @@
+.shortcut {
+  width: 84vw;
+  height: 92vh;
+  background-color: #fff;
+  border-radius: 1rem;
+  box-shadow: 0 0 16px 2px rgba(0, 0, 0, .3);
+  display: flex;
+  flex-direction: column;
+
+  ._sheader {
+    height: 72px;
+    font-size: 1.5rem;
+    line-height: 72px;
+
+    .title {
+      margin-left: 24px;
+    }
+  }
+
+  ._scontents {
+    color: #444;
+    width: 100%;
+    max-width: 1456px;
+    max-height: calc(100vh - 144px);
+    overflow: auto;
+
+    .container {
+      flex-wrap: wrap;
+      display: flex;
+      
+      .list {
+        padding: 0 16px;
+        margin-bottom: 30px;
+        min-width: 430px;
+        flex:1;
+
+        .subtitle {
+          padding: 14px;
+          font-size: 13px;
+        }
+
+        .desc {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          border-top: 1px solid #e1e1e1;
+          padding: 12px;
+        }
+
+        .text {
+          flex: 3;
+        }
+
+        .key {
+          width: 140px;
+          flex: 1;
+          margin-left: 10px;
+          font-weight: 700;
+        }
+      }
+    }
+  }
+
+  ._sfooter {
+    padding: 8px;
+    height: 56px;
+    display: inline-flex;
+    justify-content: flex-end;
+
+    .dialog-close {
+      color: #065fd4;
+      width: 40px;
+      padding: 10px;
+      text-align: center;
+      border-radius: 20px;
+
+      &:hover {
+        background-color: #d8e9fe;
+      }
+    }
+  }
+}

@@ -1,0 +1,125 @@
+.sub-menu {
+  position: absolute;
+  right: 0;
+  width: 300px;
+  max-height: 98vh;
+  border-radius: 12px;
+  box-shadow: 0 0 12px 0 rgba(125, 125, 125, 0.3);
+  background-color: #fff;
+  overflow: auto;
+}
+.sub-menu.langs:hover {
+  overflow-y: scroll;
+}
+.sub-menu .title {
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+  border-bottom: 1px solid #d1d1d1;
+  min-height: 48px;
+}
+.sub-menu .title .icn--backward {
+  font-size: 1.8rem;
+  min-width: 40px;
+  height: 40px;
+  line-height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  margin: 0 4px;
+  cursor: pointer;
+}
+.sub-menu .title .icn--backward:hover {
+  background-color: #f1f1f1;
+}
+.sub-menu .title .text {
+  flex: 1;
+}
+.sub-menu .contents {
+  display: flex;
+  flex-direction: column;
+  padding: 10px 0;
+}
+.sub-menu .contents .desc {
+  font-size: 0.8rem;
+  color: #666;
+  height: 40px;
+  line-height: 40px;
+  padding-left: 16px;
+}
+.sub-menu .contents .content {
+  align-items: center;
+  display: flex;
+  padding: 0 10px;
+  cursor: pointer;
+}
+.sub-menu .contents .content:hover {
+  background-color: #f1f1f1;
+}
+.sub-menu .contents .content.limit {
+  flex-direction: column;
+  margin-top: 10px;
+}
+.sub-menu .contents .content.limit:hover {
+  background: none;
+}
+.sub-menu .contents .content.limit .limit-desc1 {
+  width: 100%;
+  line-height: 1.2rem;
+  margin-bottom: 16px;
+}
+.sub-menu .contents .content.limit .limit-desc2 {
+  display: flex;
+  width: 100%;
+}
+.sub-menu .contents .content.limit .limit-desc2 .caption {
+  flex: 4;
+}
+.sub-menu .contents .content.limit .limit-desc2 .toggleMode {
+  position: relative;
+  width: 100%;
+  flex: 1;
+  display: flex;
+}
+.sub-menu .contents .content.limit .limit-desc2 .toggleMode .bar {
+  width: 35px;
+  height: 14px;
+  background: #d1d1d1;
+  border-radius: 10px;
+  position: absolute;
+}
+.sub-menu .contents .content.limit .limit-desc2 .toggleMode .btn {
+  width: 20px;
+  height: 20px;
+  border-radius: 10px;
+  background-color: #333;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  box-shadow: 1px 1px 8px 2px rgba(125, 125, 125, 0.3);
+  transition: transform 0.3s linear;
+}
+.sub-menu .contents .content.limit .limit-desc2 .toggleMode .btn.active {
+  background-color: #065fd4;
+  transform: translate(80%, -50%);
+}
+.sub-menu .contents .content.limit .limit-desc3 {
+  width: 100%;
+  line-height: 1.2rem;
+  margin-top: 16px;
+}
+.sub-menu .contents .content.limit .limit-desc3 .mt16 {
+  margin-top: 16px;
+}
+.sub-menu .contents .icn {
+  width: 40px;
+  height: 40px;
+  font-size: 1.6rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.sub-menu .contents .type {
+  flex: 1;
+}/*# sourceMappingURL=SubMenu.css.map */

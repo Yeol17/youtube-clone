@@ -1,0 +1,233 @@
+@charset "UTF-8";
+html,
+body,
+div,
+span,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+a,
+address,
+img,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+footer,
+header,
+nav,
+section,
+audio,
+video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+/* HTML5 display-role reset for older browsers */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+  display: block;
+}
+
+body {
+  line-height: 1;
+}
+
+ol,
+ul {
+  list-style: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+div {
+  box-sizing: border-box;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+body {
+  font-size: 14px;
+}
+
+button {
+  all: unset;
+  cursor: pointer;
+}
+
+/* 스크롤바 가로 사이즈 */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+/* 스크롤바 막대기 */
+::-webkit-scrollbar-thumb {
+  background-color: #999;
+}
+
+/* 스크롤바 백그라운드 */
+::-webkit-scrollbar-track {
+  border-radius: 0 8px 8px 0;
+}
+
+.header {
+  position: fixed;
+  top: 0;
+  width: 100vw;
+  height: 56px;
+  padding: 0 16px;
+  box-sizing: border-box;
+}
+.header .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.header .container .start {
+  display: flex;
+  align-items: center;
+}
+.header .container .start .menu-ico {
+  box-sizing: border-box;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  padding: 10px;
+  font-size: 1.3rem;
+  background-color: unset;
+  border: none;
+  border-radius: 50%;
+}
+.header .container .start .menu-ico:hover {
+  background-color: #f1f1f1;
+}
+.header .container .start .wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 13px 8px;
+}
+.header .container .start .wrapper .logo {
+  cursor: pointer;
+  text-indent: -9999px;
+  width: 100px;
+  height: 30px;
+  background: url("/assets/youtube_logo.png") no-repeat center/cover;
+}
+.header .container .center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.header .container .center .search {
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  text-align: end;
+}
+.header .container .center .search-form {
+  display: flex;
+  width: 36vw;
+  height: 40px;
+  border: 1px solid #d1d1d1;
+  border-right: 0;
+  border-radius: 20px 0 0 20px;
+}
+.header .container .center .search-form label {
+  text-indent: -9999px;
+}
+.header .container .center .search-form label:before {
+  content: "검색바";
+}
+.header .container .center .search-bar {
+  width: 90%;
+  outline: none;
+  padding: 10px;
+  border: none;
+  font-size: 1.1em;
+}
+.header .container .center .btn--search {
+  width: 60px;
+  height: 40px;
+  background-color: #f8f8f8;
+  border: 1px solid #d8d8d8;
+  border-radius: 0 20px 20px 0;
+  font-size: 1.1rem;
+  text-align: center;
+  line-height: middle;
+}
+.header .container .center .btn--search:hover {
+  background-color: #efefef;
+  box-shadow: 0 0 1px 0 rgba(125, 125, 125, 0.5);
+}
+.header .container .center .voice-search {
+  display: flex;
+  width: 40px;
+  height: 40px;
+  padding: 10px;
+  border-radius: 50%;
+  font-size: 1.4rem;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  margin-left: 8px;
+}
+.header .container .center .voice-search:hover {
+  background-color: #f1f1f1;
+}
+.header .container .end {
+  display: flex;
+}
+.header .container .end .settings {
+  position: relative;
+}
+.header .container .end .settings .btn--setting {
+  width: 40px;
+  height: 40px;
+  font-size: 1.6rem;
+  text-align: center;
+}/*# sourceMappingURL=Header.css.map */
