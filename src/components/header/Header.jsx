@@ -99,7 +99,11 @@ export default function Header() {
 
               <button type="button" className="btn--setting" onClick={(e) => {
                 e.stopPropagation();
-                setSettingMain(!settingMain)
+                setSettingMain(!settingMain);
+                if(!isSettingSub) {
+                  setIsSettingSub(false);
+                  setSettingSubType('');
+                }
               }}>
                 <AiOutlineMore />
               </button>
