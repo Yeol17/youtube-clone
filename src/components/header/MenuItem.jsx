@@ -2,7 +2,7 @@ import { SlArrowRight } from "react-icons/sl";
 
 export default function MenuItem({ itmVal, itm, onClickMenu }) {
   return (
-    <div className="itm" onClick={() => {
+    <div className="itm" onClick={(e) => {
       if(itm.more) {
         onClickMenu(itm.more)
       } else if(itm.title === '단축키'){

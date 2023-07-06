@@ -98,7 +98,7 @@ export default function SubMenu({
       <ul className={'sub-menu ' + settingSubType} style={['langs', 'location'].includes(settingSubType) ? { top: 0 } : null}>
         <li className="title">
           <div className="icn--backward" onClick={() => {
-            onClickBackward('settingMain')
+            onClickBackward()
           }}><BsArrowLeftShort /></div>
           <h5 className="text">{title}</h5>
         </li>

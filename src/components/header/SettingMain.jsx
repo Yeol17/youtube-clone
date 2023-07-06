@@ -20,9 +20,10 @@ export default function SettingMain({
 }) {
 
   const dispatch = useDispatch();
+  
 
   return (
-    <ul className="main-menu">
+    <ul className="main-menu" >
       <li className="section1">
         <div className='section-container'>
           <MenuItem itm={settings[0]}></MenuItem>

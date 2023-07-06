@@ -7,7 +7,7 @@ import { SlMagnifier } from "react-icons/sl";
 import { VscAccount } from "react-icons/vsc";
 
 //hooks
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 
 // 컴포넌트
@@ -16,29 +16,41 @@ import SettingSub from './SettingSub';
 import LoginBtn from '../LoginBtn';
 
 export default function Header() {
-  
+
   let theme = useSelector(state => state.theme);
   let langs = useSelector(state => state.langs);
   let limit = useSelector(state => state.limit);
   let location = useSelector(state => state.location);
 
   let [settingMain, setSettingMain] = useState(false);
+  let [isBackward, setIsBackward] = useState(false)
   let [settingSubType, setSettingSubType] = useState('');
   let [mode, setMode] = useState(false);
 
-  const onClickMenu = (more) => {
-    setSettingSubType(more);
-    setSettingMain(false);
+  const onClickDocument = (e) => {
+    console.log(1);
+    if(isBackward) return setIsBackward(!isBackward)
+    setSettingMain(false)
   }
-  const onClickBackward = (v) => {
-    if (v === 'settingMain') {
-      setSettingSubType('');
-      setSettingMain(true);
-    }
+
+  const onClickMenu = (more) => {
+    setSettingMain(false);
+    setSettingSubType(more);
+  }
+  const onClickBackward = () => {
+    setIsBackward(true);
+    setSettingMain(true);
+    setSettingSubType('');
+
   }
   const onClickModeChange = (v) => {
     setMode(v);
   }
+
+  useEffect(() => {
+    document.addEventListener('click', onClickDocument);
+    return () => document.removeEventListener('click', onClickDocument)
+  },)
 
   return (
     <>
@@ -72,9 +84,10 @@ export default function Header() {
           <div className="end">
             <div className="settings">
 
-              <button type="button" onClick={() => {
+              <button type="button" className="btn--setting" onClick={(e) => {
+                e.stopPropagation();
                 setSettingMain(!settingMain)
-              }} className="btn--setting">
+              }}>
                 <AiOutlineMore />
               </button>
 
@@ -86,6 +99,7 @@ export default function Header() {
                   theme={theme}
                   onClickMenu={onClickMenu}
                   setSettingMain={setSettingMain}
+                  settingMain={settingMain}
                 />}
               {settingSubType &&
                 <SettingSub

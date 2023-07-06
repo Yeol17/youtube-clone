@@ -11,7 +11,7 @@ export default function Shortcut() {
     setContHeight(window.innerHeight - 144)
   }
 
-  // 동적인 컨펜트 영역 사이즈 조절
+  // 동적인 컨텐츠 영역 사이즈 조절
   useEffect(() => {
     window.addEventListener('resize', onResized)
     return () => {
