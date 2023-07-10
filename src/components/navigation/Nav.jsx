@@ -24,12 +24,12 @@ import { Link, useLocation } from 'react-router-dom'
 
 // }
 
-// export function NavMax() {
-//   return (
-//     <nav>
-//     </nav>
-//   )
-// }
+export function NavMax() {
+  return (
+    <nav>
+    </nav>
+  )
+}
 
 export function NavMin() {
 
@@ -40,41 +40,30 @@ export function NavMin() {
     setPage(location.pathname);
   }, [location])
 
-
+  let lists = navigation.map(list => {
+    return (
+      <li className='min-itm'>
+        <Link to={list.url} className='menu-min'>
+          {page === list.url ? list.active : list.inactive}
+          <p className='text'>{list.title}</p>
+        </Link>
+      </li>
+    )
+  })
+  
   return (
     <nav>
       <ul>
-        <li className='min-itm'>
-          <Link to='/' className='menu-min'>
-            {page === '/' ? <MdHome /> : <MdOutlineHome />}
-            <p className='text'>홈</p>
-          </Link>
-        </li>
-        <li className='min-itm'>
-          <Link to='/shorts' className='menu-min'>
-            {page === '/shorts' ? <AiFillYoutube /> : <AiOutlineYoutube />}
-            <p className='text'>shorts</p>
-          </Link>
-        </li>
-        <li className='min-itm'>
-          <Link to='/feed/subscriptions' className='menu-min'>
-            {page === '/feed/subscriptions' ? < MdSubscriptions /> : <MdOutlineSubscriptions />}
-            <p className='text'>구독</p>
-          </Link>
-        </li>
-        <li className='min-itm'>
-          <Link to='/feed/library' className='menu-min'>
-            {page === '/feed/library' ? <MdVideoLibrary /> : <MdOutlineVideoLibrary />}
-            <p className='text'>보관함</p>
-          </Link>
-        </li>
-        <li className='min-itm'>
-          <Link to='/feed/history' className='menu-min'>
-            <VscHistory className={page === '/feed/history' && 'bold'} />
-            <p className='text'>시청 기록</p>
-          </Link>
-        </li>
+        {lists}
       </ul>
     </nav>
   )
 }
+
+const navigation = [
+  { id: 100, title: '홈', url: '/', active: <MdHome />, inactive: <MdOutlineHome /> },
+  { id: 101, title: 'shorts', url: '/shorts', active: <AiFillYoutube />, inactive: <AiOutlineYoutube /> },
+  { id: 102, title: '구독', url: '/feed/subscription', active: <MdSubscriptions />, inactive: <MdOutlineSubscriptions /> },
+  { id: 200, title: '보관함', url: '/feed/library', active: <MdVideoLibrary />, inactive: <MdOutlineVideoLibrary /> },
+  { id: 201, title: '시청 기록', url: '/feed/history', active: <VscHistory className='bold' />, inactive: <VscHistory /> },
+];
