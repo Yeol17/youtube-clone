@@ -1,0 +1,25 @@
+@import '../../App.scss';
+
+nav {
+  position: fixed;
+  top: 100px;
+  left: 0;
+  padding: 0 6px;
+
+  .menu-min {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    font-size: 1.4rem;
+    @include btn(64px, 74px, 18%, #f1f1f1);
+
+    .bold {
+      stroke-width: 1;
+    }
+    .text {
+      margin-top: 10px;
+      font-size: 0.7rem;
+    }
+  }
+
+}
