@@ -81,7 +81,7 @@ table {
   border-spacing: 0;
 }
 
-div {
+li,div {
   box-sizing: border-box;
 }
 

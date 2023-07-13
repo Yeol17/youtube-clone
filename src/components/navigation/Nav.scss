@@ -1,10 +1,150 @@
 @import '../../App.scss';
 
+::-webkit-scrollbar-thumb {
+  border-radius: 4px;
+}
+
+// :-webkit-scrollbar-button:vertical:start:decrement,
+// :-webkit-scrollbar-button:vertical:end:decrement,
+// :-webkit-scrollbar-button:vertical:start:increment {
+//   display: block;
+//   height: 40px;
+// }
+
 nav {
+  box-sizing: border-box;
+  width: 240px;
   position: fixed;
-  top: 100px;
+  top: 0;
   left: 0;
-  padding: 0 6px;
+  z-index: 1009;
+
+
+  .void {
+    fill: none;
+    stroke-width: 1;
+  }
+
+  .bg {
+    display: none;
+    ;
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.3);
+    z-index: 1
+  }
+
+  .container {
+    display: flex;
+    box-sizing: border-box;
+    position: absolute;
+    top: 56px;
+    height: calc(100vh - 60px);
+    z-index: 1010;
+    left: 0;
+    background-color: #fff;
+    overflow: hidden;
+
+    &:hover {
+      overflow-y: auto;
+    }
+
+    .menu-max {
+      position: relative;
+      width: 240px;
+      height: calc(100vh - 50px);
+
+      .section {
+        box-sizing: border-box;
+        width: 224px;
+        padding: 12px;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+
+        &>.tit {
+          padding: 8px;
+          font-size: 1rem;
+        }
+
+        &.guide {
+          color: rgb(96, 96, 96);
+          font-size: 0.8rem;
+          line-height: 1.1rem;
+          border: none;
+          display: flex;
+          flex-direction: column;
+
+          .mr-8 {
+            margin-right: 8px;
+            cursor: pointer;
+          }
+
+          .link {
+            color: rgb(109, 109, 240);
+          }
+
+          .bold {
+            font-weight: 600;
+          }
+
+          .prime {
+            padding: 4px 12px 0;
+            margin-bottom: 10px;
+          }
+
+          .secondary {
+            padding: 4px 12px 0;
+            margin-bottom: 10px;
+          }
+
+          .copy {
+            font-size: 0.7rem;
+            padding: 4px 12px;
+            color: rgb(144, 144, 144)
+          }
+        }
+
+        .wrap {
+
+          .text {
+            padding: 6px 12px;
+            line-height: 1.3rem;
+            font-size: 0.9rem;
+          }
+
+          .login {
+            margin: 6px 10px;
+          }
+
+          .max-itm {
+            @include btn(100%, 40px, 12px, #f1f1f1);
+
+            justify-content: left;
+            flex: 1;
+            padding: 0 10px;
+
+            .icn {
+              display: flex;
+              justify-content: center;
+              width: 24px;
+              margin-right: 1.3rem;
+              font-size: 24px;
+
+              .bold {
+                stroke-width: 1;
+              }
+            }
+
+            .tit {
+              flex: 1;
+            }
+          }
+
+
+        }
+      }
+    }
+  }
 
   .menu-min {
     display: flex;
@@ -16,6 +156,7 @@ nav {
     .bold {
       stroke-width: 1;
     }
+
     .text {
       margin-top: 10px;
       font-size: 0.7rem;

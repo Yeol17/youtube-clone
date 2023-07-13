@@ -4,7 +4,7 @@ import './Header.scss';
 import { AiOutlineMenu, AiOutlineMore } from "react-icons/ai";
 import { MdMic } from "react-icons/md";
 import { SlMagnifier } from "react-icons/sl";
-import { VscAccount } from "react-icons/vsc";
+
 
 //hooks
 import { useEffect, useState } from 'react';
@@ -133,7 +133,7 @@ export default function Header() {
 
             </div>
 
-            <LoginBtn icn={<VscAccount />} />
+            <LoginBtn />
 
           </div>
         </div>

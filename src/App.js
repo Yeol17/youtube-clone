@@ -12,7 +12,7 @@ function App() {
     <div className="App">
       <Header />
       {popUp.shortcutOpend && <Modal />}
-      <NavMin />
+      
     </div>
 
   );
