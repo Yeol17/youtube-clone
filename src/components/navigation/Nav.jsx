@@ -30,7 +30,7 @@ export function NavMax() {
   let location = useLocation();
   let [page, setPage] = useState(location.pathname);
   let [login, setLogin] = useState(false);
-  let lists, list1, list2 = [];
+  let lists;
   let classifiedBySection = []
 
   // i = 2
