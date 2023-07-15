@@ -165,7 +165,7 @@ export function NavMin() {
     lists.push(
       <li className='min-itm' key={navigation[i].id}>
         <Link to={navigation[i].url} className='menu-min'>
-          {page === navigation[i].url ? navigation[i].active : navigation[i].inactive}
+          <div className="icn">{page === navigation[i].url ? navigation[i].active : navigation[i].inactive}</div>
           <p className='text'>{navigation[i].title}</p>
         </Link>
       </li>
@@ -174,7 +174,7 @@ export function NavMin() {
 
   return (
     <nav>
-      <ul>
+      <ul className="min">
         {lists}
       </ul>
     </nav>
@@ -185,7 +185,7 @@ export function NavMin() {
 const navigation = [
   { id: 100, title: '홈', url: '/', active: <MdHome />, inactive: <MdOutlineHome /> },
   { id: 101, title: 'shorts', url: '/shorts', active: <AiFillYoutube />, inactive: <AiOutlineYoutube /> },
-  { id: 102, title: '구독', url: '/feed/subscription', active: <MdSubscriptions size="1x" />, inactive: <MdOutlineSubscriptions /> },
+  { id: 102, title: '구독', url: '/feed/subscription', active: <MdSubscriptions />, inactive: <MdOutlineSubscriptions /> },
   { id: 200, title: '보관함', url: '/feed/library', active: <MdVideoLibrary />, inactive: <MdOutlineVideoLibrary /> },
   { id: 201, title: '시청 기록', url: '/feed/history', active: <VscHistory className='bold' />, inactive: <VscHistory /> },
   { id: 301, title: '인기 급상승', url: '/feed/trending', active: <HiFire />, inactive: <HiOutlineFire /> },

@@ -13,13 +13,17 @@
 
 nav {
   box-sizing: border-box;
-  width: 240px;
   position: fixed;
   top: 0;
   left: 0;
   z-index: 1009;
 
-
+  .min {
+    position: absolute;
+    top: 62px;
+    width: 64px;
+    padding: 0 2px;
+  }
   .void {
     fill: none;
     stroke-width: 1;
@@ -27,7 +31,6 @@ nav {
 
   .bg {
     display: none;
-    ;
     position: fixed;
     width: 100vw;
     height: 100vh;
@@ -156,9 +159,11 @@ nav {
     .bold {
       stroke-width: 1;
     }
-
+    .icn {
+      font-size: 24px;
+    }
     .text {
-      margin-top: 10px;
+      margin-top: 4px;
       font-size: 0.7rem;
     }
   }

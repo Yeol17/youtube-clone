@@ -15,7 +15,7 @@ import SettingMain from './SettingMain';
 import SettingSub from './SettingSub';
 import LoginBtn from '../LoginBtn';
 
-export default function Header() {
+export default function Header({ onClickNavIcn }) {
 
   let theme = useSelector(state => state.theme);
   let langs = useSelector(state => state.langs);
@@ -38,7 +38,7 @@ export default function Header() {
     if (isSettingSub) return setIsSettingSub(false)
     setSettingSubType('');
   }
-  
+
   const onClickMenu = (more) => {
     setSettingMain(false);
     setSettingSubType(more);
@@ -70,7 +70,7 @@ export default function Header() {
       <header className='header'>
         <div className="container">
           <div className="start">
-            <button type="button" className="menu-ico">
+            <button type="button" className="menu-ico" onClick={onClickNavIcn}>
               <AiOutlineMenu />
             </button>
             <a href="/" className="wrapper">
@@ -100,7 +100,7 @@ export default function Header() {
               <button type="button" className="btn--setting" onClick={(e) => {
                 e.stopPropagation();
                 setSettingMain(!settingMain);
-                if(!isSettingSub) {
+                if (!isSettingSub) {
                   setIsSettingSub(false);
                   setSettingSubType('');
                 }
