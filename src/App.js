@@ -70,14 +70,13 @@ function App() {
   }
 
 
-
   return (
     <div className="App">
 
-      {/* 상단 검색바 */}
+      {/* Search Bar */}
       <Header onClickNavIcn={onClickNavIcn} />
 
-      {/* 메뉴 */}
+      {/* Navigation */}
       {nav}
 
       <Routes>
@@ -86,7 +85,7 @@ function App() {
       </Routes>
 
 
-      { // 설정-단축키 모달팝업
+      { // Setting-shortcut Modal Popup
         popUp.shortcutOpend && <Modal />
       }
     </div>

@@ -53,7 +53,7 @@ export function NavMax() {
       <div className="wrap" key={i}>
         {section.map(el => {
           return (
-            <NavLink to={el.url} className={({isActive}) =>  isActive ? "max-itm active" : "max-itm" } key={el.id}>
+            <NavLink to={el.url} className={({ isActive }) => isActive ? "max-itm active" : "max-itm"} key={el.id}>
               <div className="icn">{page === el.url ? (el.active || el.inactive) : el.inactive}</div>
               <div className="tit">{el.title}</div>
             </NavLink>
@@ -103,7 +103,16 @@ export function NavMax() {
             {lists[4]}
           </li>
           <li className="section">
-            {lists[5]}
+            <div className="wrap">
+              <div className="max-itm">
+                <div className="icn"><MdHelpOutline /></div>
+                <div className="tit">고객센터</div>
+              </div>
+              <div className="max-itm">
+                <div className="icn"><BiCommentError /></div>
+                <div className="tit">의견 보내기</div>
+              </div>
+            </div>
           </li>
           <li className="section guide">
             <div className="prime">
@@ -164,7 +173,7 @@ export function NavMin() {
   for (let i = 0; i < 5; i++) {
     lists.push(
       <li className='min-itm' key={navigation[i].id}>
-        <NavLink to={navigation[i].url} className={isActive => isActive ? 'menu-min active' : 'menu-itm'}>
+        <NavLink to={navigation[i].url} className={({isActive}) => isActive ? 'menu-min active' : 'menu-itm'}>
           <div className="icn">{page === navigation[i].url ? navigation[i].active : navigation[i].inactive}</div>
           <p className='text'>{navigation[i].title}</p>
         </NavLink>
@@ -198,10 +207,9 @@ const navigation = [
   { id: 308, title: '학습', url: '/channel/learning', active: <AiFillBulb />, inactive: <AiOutlineBulb /> },
   { id: 400, title: '채널 탐색', url: '/feed/guide_builder', active: <AiOutlinePlusCircle classNAme="bold" />, inactive: <AiOutlinePlusCircle /> },
   { id: 500, title: 'YouTube Premium', url: '/premium', active: <AiFillYoutube style={{ fill: 'red' }} />, inactive: <AiFillYoutube style={{ fill: 'red' }} /> },
-  { id: 501, title: 'YouTube Music', url: '/premium', active: <SiYoutubemusic style={{ fill: 'red' }} />, inactive: <SiYoutubemusic style={{ fill: 'red' }} /> },
+  { id: 501, title: 'YouTube Music', url: '/music', active: <SiYoutubemusic style={{ fill: 'red' }} />, inactive: <SiYoutubemusic style={{ fill: 'red' }} /> },
   { id: 502, title: 'YouTube Kids', url: '/kids', active: <TbBrandYoutubeKids style={{ fill: 'red' }} />, inactive: <TbBrandYoutubeKids style={{ fill: 'red' }} /> },
   { id: 600, title: '설정', url: '/accounts', active: <IoSettingsOutline />, inactive: <IoSettingsOutline /> },
   { id: 601, title: '신고 기록', url: '/reporthistory', active: <MdFlag />, inactive: <MdOutlineFlag /> },
-  { id: 602, title: '고객센터', active: '', inactive: <MdHelpOutline /> },
-  { id: 603, title: '의견 보내기', active: '', inactive: <BiCommentError /> },
+  
 ];
