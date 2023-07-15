@@ -23,7 +23,7 @@ import {
 } from 'react-icons/ai'
 
 import { useEffect, useState } from 'react'
-import { Link, useLocation } from 'react-router-dom'
+import { NavLink, useLocation } from 'react-router-dom'
 import LoginBtn from '../LoginBtn'
 
 export function NavMax() {
@@ -53,10 +53,10 @@ export function NavMax() {
       <div className="wrap" key={i}>
         {section.map(el => {
           return (
-            <Link to={el.url} className="max-itm" key={el.id}>
+            <NavLink to={el.url} className={({isActive}) =>  isActive ? "max-itm active" : "max-itm" } key={el.id}>
               <div className="icn">{page === el.url ? (el.active || el.inactive) : el.inactive}</div>
               <div className="tit">{el.title}</div>
-            </Link>
+            </NavLink>
           )
         })}
       </div>
@@ -138,8 +138,8 @@ export function NavMax() {
                   Mountain View CA 94043, USA,
                   0807-882-594 (무료), yt-support-
                   solutions-kr@google.com, 호스팅:
-                  Google LLC,</span> <a href="/#" className="link">사업자정보</a>, <a href="/#"  className="link">불법촬영물
-                  신고</a>
+                  Google LLC,</span> <a href="/#" className="link">사업자정보</a>, <a href="/#" className="link">불법촬영물
+                    신고</a>
               </div>
               <div>크리에이터들이 유튜브 상에 게시, 태그 또는 추천한 상품들은 판매자들의 약관에 따라 판매됩니다. 유튜브는 이러한 제품들을 판매하지 않으며, 그에 대한 책임을 지지 않습니다</div>
             </div>
@@ -164,10 +164,10 @@ export function NavMin() {
   for (let i = 0; i < 5; i++) {
     lists.push(
       <li className='min-itm' key={navigation[i].id}>
-        <Link to={navigation[i].url} className='menu-min'>
+        <NavLink to={navigation[i].url} className={isActive => isActive ? 'menu-min active' : 'menu-itm'}>
           <div className="icn">{page === navigation[i].url ? navigation[i].active : navigation[i].inactive}</div>
           <p className='text'>{navigation[i].title}</p>
-        </Link>
+        </NavLink>
       </li>
     )
   }
