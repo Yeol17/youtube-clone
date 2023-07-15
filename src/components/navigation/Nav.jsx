@@ -173,7 +173,7 @@ export function NavMin() {
   for (let i = 0; i < 5; i++) {
     lists.push(
       <li className='min-itm' key={navigation[i].id}>
-        <NavLink to={navigation[i].url} className={({isActive}) => isActive ? 'menu-min active' : 'menu-itm'}>
+        <NavLink to={navigation[i].url} className={({isActive}) => isActive ? 'menu-min active' : 'menu-min'}>
           <div className="icn">{page === navigation[i].url ? navigation[i].active : navigation[i].inactive}</div>
           <p className='text'>{navigation[i].title}</p>
         </NavLink>

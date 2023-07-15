@@ -158,7 +158,11 @@ nav {
     justify-content: center;
     font-size: 1.4rem;
     @include btn(64px, 74px, 18%, #f1f1f1);
-
+  
+    &.active {
+      background-color: #f1f1f1;
+    }
+    
     .bold {
       stroke-width: 1;
     }
