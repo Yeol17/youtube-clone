@@ -30,8 +30,10 @@ import Menu from '../Menu'
 export function NavMax({
   navType,
   vWidth,
-  onClickNavIcn
+  onClickNavIcn,
+  onClickBG
 }) {
+
   let location = useLocation();
   let [page, setPage] = useState(location.pathname);
   let [login, setLogin] = useState(false);
@@ -39,11 +41,11 @@ export function NavMax({
   let classifiedBySection = []
   let [fade, setFade] = useState('');
   let [visible, setVisible] = useState('');
+
   // i = 2
   // i * 100 <= id < (i+1) * 100
   // 200 =< id < 300
   // 300 =< id < 400
-
   for (let i = 1; i <= 6; i++) {
     let tmp = [];
     for (let j = 0; j < navigation.length; j++) {
@@ -98,7 +100,9 @@ export function NavMax({
 
   return (
     <nav style={{ zIndex: 900 }}>
-      <div className={`bg ` + visible}></div>
+      <div className={`bg ` + visible} onClick={() => {
+        onClickBG();
+      }}></div>
       <Menu onClickNavIcn={onClickNavIcn} visible={visible} />
       <div className={'container ' + fade} >
         <ul className="menu-max">

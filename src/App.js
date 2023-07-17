@@ -29,6 +29,11 @@ function App() {
   let [vWidth, setVWidth] = useState(window.innerWidth);
   let [navType, setNavType] = useState('');
 
+  const onClickBG = () => {
+    console.log('123');
+    setNavType('min');
+  }
+
   const onClickNavIcn = () => {
     if (navType === 'extend') {
       setNavType('min');
@@ -84,8 +89,9 @@ function App() {
         navType={navType}
         vWidth={vWidth}
         onClickNavIcn={onClickNavIcn}
+        onClickBG={onClickBG}
       />
-      
+
       {nav}
 
       <Routes>
