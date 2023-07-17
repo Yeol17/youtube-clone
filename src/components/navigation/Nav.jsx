@@ -23,16 +23,22 @@ import {
 } from 'react-icons/ai'
 
 import { useEffect, useState } from 'react'
-import { NavLink, useLocation } from 'react-router-dom'
+import { Link, NavLink, useLocation } from 'react-router-dom'
 import LoginBtn from '../LoginBtn'
+import Menu from '../Menu'
 
-export function NavMax() {
+export function NavMax({
+  navType,
+  vWidth,
+  onClickNavIcn
+}) {
   let location = useLocation();
   let [page, setPage] = useState(location.pathname);
   let [login, setLogin] = useState(false);
   let lists;
   let classifiedBySection = []
-
+  let [fade, setFade] = useState('');
+  let [visible, setVisible] = useState('');
   // i = 2
   // i * 100 <= id < (i+1) * 100
   // 200 =< id < 300
@@ -67,11 +73,34 @@ export function NavMax() {
     setPage(location.pathname);
   }, [location])
 
+  useEffect(() => {
+    setTimeout(() => {
+      if (navType === 'modal') {
+        setFade('hidden modal');
+        setVisible('visible')
+      } else if (navType === 'min') {
+        if (vWidth > 1312) {
+          setFade('none');;
+          return
+        }
+        setFade('hidden');
+        setVisible('')
+      } else if (navType === 'extend') {
+        setFade('extend');
+      }
+    }, 100)
+
+    return () => {
+      setFade('')
+      setVisible('')
+    }
+  }, [navType])
+
   return (
-    <nav>
-      <div className="bg"></div>
-      <div className="container">
-        <div></div>
+    <nav style={{ zIndex: 900 }}>
+      <div className={`bg ` + visible}></div>
+      <Menu onClickNavIcn={onClickNavIcn} visible={visible} />
+      <div className={'container ' + fade} >
         <ul className="menu-max">
           <li className="section">
             {lists[0]}
@@ -155,7 +184,7 @@ export function NavMax() {
           </li>
         </ul>
       </div>
-    </nav>
+    </nav >
   )
 }
 
@@ -173,16 +202,16 @@ export function NavMin() {
   for (let i = 0; i < 5; i++) {
     lists.push(
       <li className='min-itm' key={navigation[i].id}>
-        <NavLink to={navigation[i].url} className={({isActive}) => isActive ? 'menu-min active' : 'menu-min'}>
+        <Link to={navigation[i].url} className="menu-min">
           <div className="icn">{page === navigation[i].url ? navigation[i].active : navigation[i].inactive}</div>
           <p className='text'>{navigation[i].title}</p>
-        </NavLink>
+        </Link>
       </li>
     )
   }
 
   return (
-    <nav>
+    <nav style={{ zIndex: 800 }}>
       <ul className="min">
         {lists}
       </ul>
@@ -211,5 +240,5 @@ const navigation = [
   { id: 502, title: 'YouTube Kids', url: '/kids', active: <TbBrandYoutubeKids style={{ fill: 'red' }} />, inactive: <TbBrandYoutubeKids style={{ fill: 'red' }} /> },
   { id: 600, title: '설정', url: '/accounts', active: <IoSettingsOutline />, inactive: <IoSettingsOutline /> },
   { id: 601, title: '신고 기록', url: '/reporthistory', active: <MdFlag />, inactive: <MdOutlineFlag /> },
-  
+
 ];

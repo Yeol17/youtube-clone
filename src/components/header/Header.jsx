@@ -1,7 +1,7 @@
 import './Header.scss';
 
 // 아이콘
-import { AiOutlineMenu, AiOutlineMore } from "react-icons/ai";
+import { AiOutlineMore } from "react-icons/ai";
 import { MdMic } from "react-icons/md";
 import { SlMagnifier } from "react-icons/sl";
 
@@ -14,7 +14,7 @@ import { useSelector } from 'react-redux';
 import SettingMain from './SettingMain';
 import SettingSub from './SettingSub';
 import LoginBtn from '../LoginBtn';
-
+import Menu from '../Menu';
 export default function Header({ onClickNavIcn }) {
 
   let theme = useSelector(state => state.theme);
@@ -69,14 +69,7 @@ export default function Header({ onClickNavIcn }) {
     <>
       <header className='header'>
         <div className="container">
-          <div className="start">
-            <button type="button" className="menu-ico" onClick={onClickNavIcn}>
-              <AiOutlineMenu />
-            </button>
-            <a href="/" className="wrapper">
-              <h1 className="logo">유튜브</h1>
-            </a>
-          </div>
+          <Menu onClickNavIcn={onClickNavIcn} />
 
           <div className="center">
             <form action="#" method="get" className="search-form">

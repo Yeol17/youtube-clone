@@ -1,8 +1,6 @@
 @import '../../App.scss';
 
-::-webkit-scrollbar-thumb {
-  border-radius: 4px;
-}
+
 
 // :-webkit-scrollbar-button:vertical:start:decrement,
 // :-webkit-scrollbar-button:vertical:end:decrement,
@@ -12,50 +10,94 @@
 // }
 
 nav {
-  box-sizing: border-box;
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 1009;
+  background-color: #fff;
+  height: 100%;
+  // z-index: 1009;
 
   .min {
     position: absolute;
     top: 62px;
     width: 64px;
-    padding: 0 2px;
+    padding: 0 4px;
   }
+
   .void {
     fill: none;
     stroke-width: 1;
   }
 
+  .nav-container {
+    width: 240px;
+    padding-left: 14px;
+    position: absolute;
+    background-color: #fff;
+    left: 0;
+    transition: all .3s;
+    transform: translateX(-240px);
+    
+    &.visible {
+      transform: translateX(0);
+
+    }
+  }
+
   .bg {
-    display: none;
+    visibility: hidden;
+    opacity: 0;
     position: fixed;
     width: 100vw;
     height: 100vh;
-    background-color: rgba(0, 0, 0, 0.3);
-    z-index: 1
+    background-color: rgba(0, 0, 0, 0.5);
+    transition: all .3s;
+
+    &.visible {
+      visibility: visible;
+      opacity: 1;
+    }
   }
 
   .container {
     display: flex;
-    box-sizing: border-box;
-    position: absolute;
-    top: 56px;
-    height: calc(100vh - 60px);
-    z-index: 1010;
-    left: 0;
+    flex-direction: column;
+    width: 240px;
+    position: fixed;
+    bottom: 0;
+    // height: 100%;
     background-color: #fff;
     overflow: hidden;
+    transition: transform .3s;
+    left: -240px;
+    border-top: 1px solid transparent;
+
+    &.extend {
+      left: 0;
+    }
+
+    &.none {
+      display: none;
+    }
+
+    &.hidden {
+      left: -240px;
+    }
+
+    &.modal {
+      transform: translateX(240px);
+    }
 
     &:hover {
       overflow-y: auto;
     }
 
     .menu-max {
+      display: flex;
+      flex-direction: column;
       position: relative;
       width: 240px;
+      padding-right: 16px;
       height: calc(100vh - 50px);
 
       .section {
@@ -121,6 +163,7 @@ nav {
 
           .max-itm {
             @include btn(100%, 40px, 12px, #f1f1f1);
+
             &.active {
               background-color: #f1f1f1;
             }
@@ -145,8 +188,6 @@ nav {
               flex: 1;
             }
           }
-
-
         }
       }
     }
@@ -158,17 +199,19 @@ nav {
     justify-content: center;
     font-size: 1.4rem;
     @include btn(64px, 74px, 18%, #f1f1f1);
-  
+
     &.active {
       background-color: #f1f1f1;
     }
-    
+
     .bold {
       stroke-width: 1;
     }
+
     .icn {
       font-size: 24px;
     }
+
     .text {
       margin-top: 4px;
       font-size: 0.7rem;

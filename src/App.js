@@ -22,7 +22,7 @@ function App() {
   // const iterableRoutes = pages.map(path => <Route path={path} element={<Container />} />);
 
   let timer = null;
-  let nav;
+  let [nav, setNav] = useState('');
 
   let popUp = useSelector(state => state.popUp);
 
@@ -35,9 +35,13 @@ function App() {
     } else if (navType === 'min') {
       if (vWidth < 1313) {
         setNavType('modal');
+        return
       }
       setNavType('extend');
+    } else if (navType === 'modal') {
+      setNavType('min');
     }
+    console.log(navType);
   }
 
   const onResized = () => {
@@ -52,7 +56,7 @@ function App() {
     return () => {
       window.removeEventListener('resize', onResized)
     }
-  }, [])
+  },)
 
   useEffect(() => {
     console.log(vWidth);
@@ -63,12 +67,11 @@ function App() {
     }
   }, [vWidth])
 
-  if (navType === 'min') {
-    nav = <NavMin />;
-  } else if (['extend', 'max'].includes(navType)) {
-    nav = <NavMax />;
-  }
-
+  useEffect(() => {
+    setTimeout(() => {
+      setNav(<NavMin />)
+    }, 300)
+  })
 
   return (
     <div className="App">
@@ -77,6 +80,12 @@ function App() {
       <Header onClickNavIcn={onClickNavIcn} />
 
       {/* Navigation */}
+      <NavMax
+        navType={navType}
+        vWidth={vWidth}
+        onClickNavIcn={onClickNavIcn}
+      />
+      
       {nav}
 
       <Routes>
