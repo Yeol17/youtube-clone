@@ -2,21 +2,25 @@ import './Main.scss';
 import { useEffect, useRef, useState } from 'react';
 import HThumb from '../components/thumbnail/HThumb';
 
-export default function Contents({ navWidth }) {
+export default function Main({ navWidth }) {
+
+  // 정렬 버튼
+  let [clickedSort, setClickedSort] = useState(0);
+
+  const onClickSort = (id) => {
+    setClickedSort(id)
+  }
 
   return (
-    <div className="main" style={{marginLeft: navWidth}} >
+    <div className="main" style={{ marginLeft: navWidth }} >
       {/* <HThumb /> */}
       < div className="sorting-wrapper" >
 
         <div className="sorting">
-          <div className="sort">전체</div>
-          <div className="sort">조회수</div>
-          <div className="sort">게임</div>
-          <div className="sort">요리</div>
-          <div className="sort">음악</div>
-          <div className="sort">영화</div>
-          <div className="sort">최근 업로드된 동영상</div>
+          <Sort
+            clickedSort={clickedSort}
+            onClickSort={onClickSort}
+          />
         </div>
 
       </ div>
@@ -27,6 +31,33 @@ export default function Contents({ navWidth }) {
   )
 }
 
+function Sort({ clickedSort, onClickSort }) {
+
+  const sortLists = [
+    { id: 0, title: '전체' },
+    { id: 1, title: '조회수' },
+    { id: 2, title: '게임' },
+    { id: 3, title: '요리' },
+    { id: 4, title: '음악' },
+    { id: 5, title: '영화' },
+    { id: 6, title: '최근 업로드된 동영상' },
+  ];
+
+  const sort = sortLists.map(item => {
+    return (
+      <div key={item.id} onClick={() => { onClickSort(item.id) }}
+        className={clickedSort === item.id ? 'sort selected' : 'sort'}>
+        {item.title}
+      </div>
+    )
+  })
+
+  return (
+    <div className="sorting">
+      {sort}
+    </div>
+  )
+}
 
 // const tmp = document.addEventListener("DOMContentLoaded",
 //   function () {
