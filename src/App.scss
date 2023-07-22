@@ -4,6 +4,10 @@
 // }
 
 $navMinWidth: 72px;
+$navMaxWidth: 240px;
+$SearchBarHeight: 56px;
+$btnBg: #f1f1f1;
+$btnBgHov: rgba(0,0,0,0.1);
 
 body {
   font: {
@@ -44,6 +48,7 @@ button {
   border-radius: $radius;
   box-sizing: border-box;
   cursor: pointer;
+  transition: all .3s;
 
   &:hover {
     background-color: $bgHover

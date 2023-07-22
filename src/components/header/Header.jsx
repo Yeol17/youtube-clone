@@ -58,12 +58,7 @@ export default function Header({ onClickNavIcn }) {
   useEffect(() => {
     document.addEventListener('click', onClickDocument);
     return () => document.removeEventListener('click', onClickDocument)
-  },)
-
-  // 
-  useEffect(() => {
-
-  })
+  },[])
 
   return (
     <>

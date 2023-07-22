@@ -1,13 +1,15 @@
 import './App.scss';
-import { useSelector } from 'react-redux';
-import { Routes, Route } from 'react-router-dom';
-
 import Header from './components/header/Header'
 import Modal from './components/dialog/Modal'
 import Main from './pages/Main';
 import Watch from './pages/Watch';
-import { useEffect, useState } from 'react';
 import { NavMax, NavMin } from './components/navigation/Nav'
+import { useSelector } from 'react-redux';
+import { Routes, Route } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
+
+
 
 function App() {
 
@@ -28,9 +30,9 @@ function App() {
 
   let [vWidth, setVWidth] = useState(window.innerWidth);
   let [navType, setNavType] = useState('');
+  let [navWidth, setNavWidth] = useState(0);
 
   const onClickBG = () => {
-    console.log('123');
     setNavType('min');
   }
 
@@ -46,7 +48,6 @@ function App() {
     } else if (navType === 'modal') {
       setNavType('min');
     }
-    console.log(navType);
   }
 
   const onResized = () => {
@@ -57,14 +58,6 @@ function App() {
   };
 
   useEffect(() => {
-    window.addEventListener('resize', onResized)
-    return () => {
-      window.removeEventListener('resize', onResized)
-    }
-  },)
-
-  useEffect(() => {
-    console.log(vWidth);
     if (vWidth > 1312) {
       setNavType('extend');
     } else {
@@ -73,10 +66,35 @@ function App() {
   }, [vWidth])
 
   useEffect(() => {
-    setTimeout(() => {
+    window.addEventListener('resize', onResized)
+    return () => {
+      window.removeEventListener('resize', onResized)
+    }
+  }, [])
+
+  useEffect(() => {
+    if (navType === 'min') {
+      setNavWidth(72);
+    } else if (navType === 'extend') {
+      setNavWidth(240);
+    }
+  }, [navType])
+
+  useEffect(() => {
+    const lazyLoadNav = setTimeout(() => {
       setNav(<NavMin />)
     }, 300)
-  })
+    return () => {
+      clearTimeout(lazyLoadNav);
+    }
+  }, [])
+
+  // useEffect(() => {
+  //   axios.get('https://www.googleapis.com/youtube/v3/videos?key=AIzaSyDuoLXZTC533FJEOuj7LzacYC_OadzainQ&chart=mostPopular&part=snippet,contentDetails,statistics,status&regionCode=KR&maxResults=3')
+  //   .then(res => {
+  //     console.log(res.data);
+  //   }).catch(err => console.log(err));
+  // },[])
 
   return (
     <div className="App">
@@ -95,7 +113,7 @@ function App() {
       {nav}
 
       <Routes>
-        <Route path='/' element={<Main />} />
+        <Route path='/' element={<Main navWidth={navWidth} />} />
         <Route path='*' element={<div>404</div>} />
       </Routes>
 

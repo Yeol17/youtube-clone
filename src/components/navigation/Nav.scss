@@ -30,7 +30,7 @@ nav {
   }
 
   .nav-container {
-    width: 240px;
+    width: $navMaxWidth;
     padding-left: 14px;
     position: absolute;
     background-color: #fff;
@@ -62,14 +62,14 @@ nav {
   .container {
     display: flex;
     flex-direction: column;
-    width: 240px;
+    width: $navMaxWidth;
     position: fixed;
     bottom: 0;
     // height: 100%;
     background-color: #fff;
     overflow: hidden;
     transition: transform .3s;
-    left: -240px;
+    left: -$navMaxWidth;
     border-top: 1px solid transparent;
 
     &.extend {
@@ -81,7 +81,7 @@ nav {
     }
 
     &.hidden {
-      left: -240px;
+      left: -$navMaxWidth
     }
 
     &.modal {
@@ -96,8 +96,8 @@ nav {
       display: flex;
       flex-direction: column;
       position: relative;
-      width: 240px;
-      padding-right: 16px;
+      width: $navMaxWidth;
+      // padding-right: 16px;
       height: calc(100vh - 50px);
 
       .section {
