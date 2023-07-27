@@ -7,7 +7,7 @@ import { NavMax, NavMin } from './components/navigation/Nav'
 import { useSelector } from 'react-redux';
 import { Routes, Route } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import axios from 'axios';
+
 
 
 
@@ -28,6 +28,7 @@ function App() {
 
   let popUp = useSelector(state => state.popUp);
 
+  let [row, setRow] = useState(3);
   let [vWidth, setVWidth] = useState(window.innerWidth);
   let [navType, setNavType] = useState('');
   let [navWidth, setNavWidth] = useState(0);
@@ -56,6 +57,11 @@ function App() {
       setVWidth(window.innerWidth);
     }, 300)
   };
+
+  useEffect(() => {
+    // 1440, v > 1080 = 3, v > 720 = 2, 480
+    // if(vWidth)
+  }, [vWidth])
 
   useEffect(() => {
     if (vWidth > 1312) {
@@ -113,7 +119,7 @@ function App() {
       {nav}
 
       <Routes>
-        <Route path='/' element={<Main navWidth={navWidth} />} />
+        <Route path='/' element={<Main navWidth={navWidth} vWidth={vWidth} row={row}/>} />
         <Route path='*' element={<div>404</div>} />
       </Routes>
 

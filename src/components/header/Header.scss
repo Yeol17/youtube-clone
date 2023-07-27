@@ -5,6 +5,10 @@
   height: 56px;
   padding: 0 16px;
   box-sizing: border-box;
+  position: fixed;
+  background-color: #fff;
+  top: 0;
+  z-index: 890;
 
   .container {
     display: flex;
