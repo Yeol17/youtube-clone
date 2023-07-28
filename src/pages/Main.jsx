@@ -17,6 +17,34 @@ export default function Main({ navWidth, vWidth, row }) {
     setClickedSort(id)
   };
 
+  const relativeDateFormat = (date) => {
+    let unit;
+    let t = (Number(new Date(date) - new Date()));
+    if (t > -3600000) {
+      unit = [1000000, 'minute'];
+    } else if (t > -86400000) {
+      unit = [10000000, 'hour'];
+    } else if (t > -604800016.56) {
+      unit = [100000000, 'day'];
+    } else if (t > -2629800000) {
+      unit = [1000000000, 'week'];
+    } else if (t > -31557600000) {
+      unit = [10000000000, 'month'];
+    } else {
+      unit = [10000000000, 'year'];
+    }
+
+    return new Intl.RelativeTimeFormat('ko')
+      .format(Math.trunc(t / unit[0]), `${unit[1]}`)
+  }
+
+  const viewFormat = (cnt) => {
+    return '조회수 ' + (new Intl.NumberFormat('ko-KR', {
+      notation: 'compact',
+      maximumFractionDigits: `${cnt.length < 6 ? 1 : 0}`,
+    }).format(cnt)) + '회'
+  }
+
   useEffect(() => {
     let scroll = 16;
     let contentsPd = 32;
@@ -66,10 +94,10 @@ export default function Main({ navWidth, vWidth, row }) {
     if (channelId.length < 1) return
     let contents = popularVideosData.map(video => {
       let channel = channelId.find(itm => video.snippet.channelId === itm.id); return (
-        <div className="content" key={video.id} style={{maxWidth: itemWidth}}>
+        <div className="content" key={video.id} style={{ maxWidth: itemWidth }}>
 
           <Link to={`/watch?v=${video.id}`} className='item'>
-            <div className="thumb-nail" style={{minWidth: itemWidth, height: itemWidth * 0.55}}>
+            <div className="thumb-nail" style={{ minWidth: itemWidth, height: itemWidth * 0.55 }}>
               <img src={video.snippet.thumbnails.standard.url} alt="" />
             </div>
             <div className="details">
@@ -80,9 +108,9 @@ export default function Main({ navWidth, vWidth, row }) {
                 <div className="video-title">{video.snippet.title}</div>
                 <div className="channel-title">{channel.snippet.title}</div>
                 <div className="meta-video">
-                  <span className="view-cnt">{video.statistics.viewCount}</span>
+                  <span className="view-cnt">{viewFormat(video.statistics.viewCount)}</span>
                   <span className="seperator">·</span>
-                  <span className="upload-date">{video.snippet.publishedAt}</span>
+                  <span className="upload-date">{relativeDateFormat(video.snippet.publishedAt)}</span>
                 </div>
               </div>
             </div>
@@ -91,7 +119,7 @@ export default function Main({ navWidth, vWidth, row }) {
       )
     })
     setContents(contents);
-  }, [channelId, itemWidth])
+  }, [channelId, itemWidth, popularVideosData])
   return (
     <div className="main" style={{ marginLeft: navWidth, width: vWidth - navWidth - 16 }} >
       {/* <HThumb /> */}
