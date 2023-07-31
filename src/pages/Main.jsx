@@ -9,9 +9,12 @@ export default function Main({ navWidth, vWidth, row }) {
 
   let [itemWidth, setitemWidth] = useState(0);
   let [clickedSort, setClickedSort] = useState(0);
+  let [videosId, setVideosId] = useState([]);
   let [popularVideosData, setPopularVideosData] = useState([]);
   let [channelId, setChannelId] = useState([]);
   let [contents, setContents] = useState([]);
+
+  let [maxResults, setMaxResults] = useState(1);
 
   const onClickSort = (id) => {
     setClickedSort(id)
@@ -20,6 +23,7 @@ export default function Main({ navWidth, vWidth, row }) {
   const relativeDateFormat = (date) => {
     let unit;
     let t = (Number(new Date(date) - new Date()));
+
     if (t > -3600000) {
       unit = [1000000, 'minute'];
     } else if (t > -86400000) {
@@ -29,13 +33,15 @@ export default function Main({ navWidth, vWidth, row }) {
     } else if (t > -2629800000) {
       unit = [1000000000, 'week'];
     } else if (t > -31557600000) {
-      unit = [10000000000, 'month'];
-    } else {
+      unit = [1000000000, 'month'];
+    } else if (t < -31557600000) {
       unit = [10000000000, 'year'];
     }
 
+    t = Math.trunc(t / unit[0]);
+
     return new Intl.RelativeTimeFormat('ko')
-      .format(Math.trunc(t / unit[0]), `${unit[1]}`)
+      .format(t, `${unit[1]}`)
   }
 
   const viewFormat = (cnt) => {
@@ -53,14 +59,27 @@ export default function Main({ navWidth, vWidth, row }) {
   }, [vWidth, navWidth, row])
 
   useEffect(() => {
-    axios.get('https://www.googleapis.com/youtube/v3/videos?key=AIzaSyDuoLXZTC533FJEOuj7LzacYC_OadzainQ&chart=mostPopular&part=snippet,statistics,contentDetails&regionCode=KR&maxResults=7&fields=items(id,statistics(viewCount),contentDetails(duration),snippet(publishedAt,channelId,title,thumbnails(standard(url))))')
+    axios.get(`https://www.googleapis.com/youtube/v3/search?key=AIzaSyDuoLXZTC533FJEOuj7LzacYC_OadzainQ&part=id&regionCode=KR&type=video&maxResults=${maxResults}&fields=items(id(videoId))`)
       .then(res => {
-        setPopularVideosData([...res.data.items]);
+        let tmp = res.data.items.map(itm => itm.id.videoId);
+        setVideosId([...tmp]);
       }).catch(err => console.log(err))
+
   }, []);
 
   useEffect(() => {
-    if (popularVideosData.length < 1) return
+    console.log(videosId.length);
+    if (videosId.length <= 0) return
+    axios.get(`https://www.googleapis.com/youtube/v3/videos?key=AIzaSyDuoLXZTC533FJEOuj7LzacYC_OadzainQ&id=${videosId}&part=snippet,statistics,contentDetails&regionCode=KR&fields=items(id,statistics(viewCount),contentDetails(duration),snippet(publishedAt,channelId,title,thumbnails(standard(url))))`)
+      .then(res => {
+        console.log(res.data);
+        setPopularVideosData([...res.data.items]);
+      }).catch(err => console.log(err))
+  }, [videosId]);
+
+  useEffect(() => {
+    console.log(popularVideosData.length);
+    if (popularVideosData.length <= 0) return
     let channelIds = popularVideosData.map(itm => itm.snippet.channelId);
     axios.get(`https://www.googleapis.com/youtube/v3/channels?key=AIzaSyDuoLXZTC533FJEOuj7LzacYC_OadzainQ&part=snippet&id=${channelIds}&fields=items(id,snippet(title,thumbnails(default)))`)
       .then(res => {
@@ -91,9 +110,12 @@ export default function Main({ navWidth, vWidth, row }) {
   //   .........
   // ]
   useEffect(() => {
-    if (channelId.length < 1) return
+    if (channelId.length <= 0) return
+
     let contents = popularVideosData.map(video => {
-      let channel = channelId.find(itm => video.snippet.channelId === itm.id); return (
+      console.log(video);
+      let channel = channelId.find(itm => video.snippet.channelId === itm.id);
+      return (
         <div className="content" key={video.id} style={{ maxWidth: itemWidth }}>
 
           <Link to={`/watch?v=${video.id}`} className='item'>
@@ -108,7 +130,7 @@ export default function Main({ navWidth, vWidth, row }) {
                 <div className="video-title">{video.snippet.title}</div>
                 <div className="channel-title">{channel.snippet.title}</div>
                 <div className="meta-video">
-                  <span className="view-cnt">{viewFormat(video.statistics.viewCount)}</span>
+                  <span className="view-cnt">{video.statistics.viewCount ? viewFormat(video.statistics.viewCount) : ''}</span>
                   <span className="seperator">·</span>
                   <span className="upload-date">{relativeDateFormat(video.snippet.publishedAt)}</span>
                 </div>

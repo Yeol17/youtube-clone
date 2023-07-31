@@ -119,7 +119,7 @@ function App() {
       {nav}
 
       <Routes>
-        <Route path='/' element={<Main navWidth={navWidth} vWidth={vWidth} row={row}/>} />
+        <Route path='/' element={<Main navWidth={navWidth} vWidth={vWidth} row={row} />} />
         <Route path='*' element={<div>404</div>} />
       </Routes>
 
