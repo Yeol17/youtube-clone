@@ -14,7 +14,7 @@ export default function Main({ navWidth, vWidth, row }) {
   let [channelId, setChannelId] = useState([]);
   let [contents, setContents] = useState([]);
 
-  let [maxResults, setMaxResults] = useState(4);
+  let [maxResults, setMaxResults] = useState(2);
 
   const onClickSort = (id) => {
     setClickedSort(id)
@@ -61,31 +61,24 @@ export default function Main({ navWidth, vWidth, row }) {
   useEffect(() => {
     axios.get(`https://www.googleapis.com/youtube/v3/search?key=AIzaSyDuoLXZTC533FJEOuj7LzacYC_OadzainQ&part=id&regionCode=KR&type=video&maxResults=${maxResults}&fields=items(id(videoId))`)
       .then(res => {
-        let tmp = res.data.items.map(itm => itm.id.videoId);
-        setVideosId([...tmp]);
+        let videoId = res.data.items.map(itm => itm.id.videoId);
+        setVideosId([...videoId])
+        return videoId
+      }).then(videoId => {
+        axios.get(`https://www.googleapis.com/youtube/v3/videos?key=AIzaSyDuoLXZTC533FJEOuj7LzacYC_OadzainQ&id=${videoId.toString()}&part=snippet,statistics,contentDetails&regionCode=KR&fields=items(id,statistics(viewCount),contentDetails(duration),snippet(publishedAt,channelId,title,thumbnails(standard(url))))`)
+          .then(res => {
+            let popularVideos = [...res.data.items];
+            setPopularVideosData(popularVideos);
+            return popularVideos
+          }).then(popularVideos => {
+            let channelIds = popularVideos.map(itm => itm.snippet.channelId);
+            axios.get(`https://www.googleapis.com/youtube/v3/channels?key=AIzaSyDuoLXZTC533FJEOuj7LzacYC_OadzainQ&part=snippet&id=${channelIds}&fields=items(id,snippet(title,thumbnails(default)))`)
+              .then(res => {
+                setChannelId(res.data.items);
+              })
+          })
       }).catch(err => console.log(err))
-
   }, []);
-
-  useEffect(() => {
-    console.log(videosId.length);
-    if (videosId.length <= 0) return
-    axios.get(`https://www.googleapis.com/youtube/v3/videos?key=AIzaSyDuoLXZTC533FJEOuj7LzacYC_OadzainQ&id=${videosId}&part=snippet,statistics,contentDetails&regionCode=KR&fields=items(id,statistics(viewCount),contentDetails(duration),snippet(publishedAt,channelId,title,thumbnails(standard(url))))`)
-      .then(res => {
-        console.log(res.data);
-        setPopularVideosData([...res.data.items]);
-      }).catch(err => console.log(err))
-  }, [videosId]);
-
-  useEffect(() => {
-    console.log(popularVideosData.length);
-    if (popularVideosData.length <= 0) return
-    let channelIds = popularVideosData.map(itm => itm.snippet.channelId);
-    axios.get(`https://www.googleapis.com/youtube/v3/channels?key=AIzaSyDuoLXZTC533FJEOuj7LzacYC_OadzainQ&part=snippet&id=${channelIds}&fields=items(id,snippet(title,thumbnails(default)))`)
-      .then(res => {
-        setChannelId(res.data.items);
-      })
-  }, [popularVideosData])
 
   // popularVideosDatas = [
   //   {
@@ -113,7 +106,6 @@ export default function Main({ navWidth, vWidth, row }) {
     if (channelId.length <= 0) return
 
     let contents = popularVideosData.map(video => {
-      console.log(video);
       let channel = channelId.find(itm => video.snippet.channelId === itm.id);
       return (
         <div className="content" key={video.id} style={{ maxWidth: itemWidth }}>
