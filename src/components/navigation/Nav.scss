@@ -71,6 +71,7 @@ nav {
     transition: transform .3s;
     left: -$navMaxWidth;
     border-top: 1px solid transparent;
+    overscroll-behavior: contain;
 
     &.extend {
       left: 0;
@@ -89,7 +90,7 @@ nav {
     }
 
     &:hover {
-      overflow-y: auto;
+      overflow-y: scroll;
     }
 
     .menu-max {

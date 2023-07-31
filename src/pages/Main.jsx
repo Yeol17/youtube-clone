@@ -14,7 +14,7 @@ export default function Main({ navWidth, vWidth, row }) {
   let [channelId, setChannelId] = useState([]);
   let [contents, setContents] = useState([]);
 
-  let [maxResults, setMaxResults] = useState(1);
+  let [maxResults, setMaxResults] = useState(4);
 
   const onClickSort = (id) => {
     setClickedSort(id)
