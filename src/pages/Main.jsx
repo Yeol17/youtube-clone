@@ -9,12 +9,9 @@ export default function Main({ navWidth, vWidth, row }) {
 
   let [itemWidth, setitemWidth] = useState(0);
   let [clickedSort, setClickedSort] = useState(0);
-  let [videosId, setVideosId] = useState([]);
   let [popularVideosData, setPopularVideosData] = useState([]);
   let [channelId, setChannelId] = useState([]);
-  let [contents, setContents] = useState([]);
-
-  let [maxResults, setMaxResults] = useState(2);
+  let [contents, setContents] = useState([])
 
   const onClickSort = (id) => {
     setClickedSort(id)
@@ -51,6 +48,12 @@ export default function Main({ navWidth, vWidth, row }) {
     }).format(cnt)) + '회'
   }
 
+  const durationFormat = (d) => {
+    let time = d.split(/[A-Z]/d);
+    time = time.filter(t => t !== '');
+    return time.join(':');
+  }
+
   useEffect(() => {
     let scroll = 16;
     let contentsPd = 32;
@@ -59,24 +62,16 @@ export default function Main({ navWidth, vWidth, row }) {
   }, [vWidth, navWidth, row])
 
   useEffect(() => {
-    axios.get(`https://www.googleapis.com/youtube/v3/search?key=AIzaSyDuoLXZTC533FJEOuj7LzacYC_OadzainQ&part=id&regionCode=KR&type=video&maxResults=${maxResults}&fields=items(id(videoId))`)
+    axios.get(`https://www.googleapis.com/youtube/v3/videos?key=AIzaSyB6OW8e_Sw5L67oECpmbOs16FNeXgyCLs4&part=snippet,statistics,contentDetails&chart=mostPopular&regionCode=KR&maxResults=50&fields=items(id,statistics(viewCount),contentDetails(duration),snippet(publishedAt,channelId,title,thumbnails(standard(url))))`)
       .then(res => {
-        let videoId = res.data.items.map(itm => itm.id.videoId);
-        setVideosId([...videoId])
-        return videoId
-      }).then(videoId => {
-        axios.get(`https://www.googleapis.com/youtube/v3/videos?key=AIzaSyDuoLXZTC533FJEOuj7LzacYC_OadzainQ&id=${videoId.toString()}&part=snippet,statistics,contentDetails&regionCode=KR&fields=items(id,statistics(viewCount),contentDetails(duration),snippet(publishedAt,channelId,title,thumbnails(standard(url))))`)
-          .then(res => {
-            let popularVideos = [...res.data.items];
-            setPopularVideosData(popularVideos);
-            return popularVideos
-          }).then(popularVideos => {
-            let channelIds = popularVideos.map(itm => itm.snippet.channelId);
-            axios.get(`https://www.googleapis.com/youtube/v3/channels?key=AIzaSyDuoLXZTC533FJEOuj7LzacYC_OadzainQ&part=snippet&id=${channelIds}&fields=items(id,snippet(title,thumbnails(default)))`)
-              .then(res => {
-                setChannelId(res.data.items);
-              })
-          })
+        let popularVideos = [...res.data.items];
+        console.log(popularVideos);
+        setPopularVideosData(popularVideos);
+        return popularVideos
+      }).then(popularVideos => {
+        let channelIds = popularVideos.map(itm => itm.snippet.channelId);
+        axios.get(`https://www.googleapis.com/youtube/v3/channels?key=AIzaSyB6OW8e_Sw5L67oECpmbOs16FNeXgyCLs4&part=snippet&id=${channelIds}&fields=items(id,snippet(title,thumbnails(default)))`)
+          .then(res => setChannelId(res.data.items));
       }).catch(err => console.log(err))
   }, []);
 
@@ -104,8 +99,9 @@ export default function Main({ navWidth, vWidth, row }) {
   // ]
   useEffect(() => {
     if (channelId.length <= 0) return
-
-    let contents = popularVideosData.map(video => {
+    let copyData = [...popularVideosData].sort(() => Math.random() - 0.5);
+    let contents = copyData.map(video => {
+      console.log(video);
       let channel = channelId.find(itm => video.snippet.channelId === itm.id);
       return (
         <div className="content" key={video.id} style={{ maxWidth: itemWidth }}>
@@ -113,13 +109,14 @@ export default function Main({ navWidth, vWidth, row }) {
           <Link to={`/watch?v=${video.id}`} className='item'>
             <div className="thumb-nail" style={{ minWidth: itemWidth, height: itemWidth * 0.55 }}>
               <img src={video.snippet.thumbnails.standard.url} alt="" />
+              <div className="duration">{durationFormat(video.contentDetails.duration)}</div>
             </div>
             <div className="details">
               <div className="channel-avatar">
                 <img src={channel.snippet.thumbnails.default.url} alt="" />
               </div>
               <div className="meta">
-                <div className="video-title">{video.snippet.title}</div>
+                <div className="video-title" style={{maxWidth: itemWidth}}><span>{video.snippet.title}</span></div>
                 <div className="channel-title">{channel.snippet.title}</div>
                 <div className="meta-video">
                   <span className="view-cnt">{video.statistics.viewCount ? viewFormat(video.statistics.viewCount) : ''}</span>

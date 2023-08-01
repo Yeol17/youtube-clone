@@ -59,11 +59,6 @@ function App() {
   };
 
   useEffect(() => {
-    // 1440, v > 1080 = 3, v > 720 = 2, 480
-    // if(vWidth)
-  }, [vWidth])
-
-  useEffect(() => {
     if (vWidth > 1312) {
       setNavType('extend');
     } else {

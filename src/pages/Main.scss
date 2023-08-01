@@ -50,12 +50,26 @@
           border-radius: 12px;
           overflow: hidden;
           width: 100%;
+          position: relative;
 
           img {
             width: 100%;
             height: 100%;
             object-fit: cover;
             background-color: transparent;
+          }
+
+          .duration {
+            background-color: $text-prime;
+            font-size: 0.8rem;
+            color: #fff;
+            font-weight: 700;
+            line-height: 1.2rem;
+            padding: 0 3px;
+            position: absolute;
+            bottom: 4px;
+            right: 3px;
+            border-radius: 4px;
           }
         }
 
@@ -79,13 +93,21 @@
           }
 
           .meta {
-            display: flex;
             flex-direction: column;
 
             .video-title {
+              padding-right: 24px;
               font-size: 16px;
               line-height: 1.2rem;
               color: $text-prime;
+              display: block;
+              overflow: hidden;
+              text-overflow: ellipsis;
+              white-space: normal;
+              display: -webkit-box;
+              -webkit-line-clamp: 2;
+              -webkit-box-orient: vertical;
+
             }
 
             .channel-title {
@@ -95,7 +117,7 @@
 
             .meta-video {
               color: $text-end;
-              margin-top: 4px;
+              margin-top: 6px;
 
               .seperator {
                 margin: 0 4px;
