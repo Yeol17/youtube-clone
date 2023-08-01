@@ -20,19 +20,19 @@ export default function Main({ navWidth, vWidth, row }) {
   const relativeDateFormat = (date) => {
     let unit;
     let t = (Number(new Date(date) - new Date()));
-
+    console.log(t);
     if (t > -3600000) {
-      unit = [1000000, 'minute'];
-    } else if (t > -86400000) {
-      unit = [10000000, 'hour'];
-    } else if (t > -604800016.56) {
-      unit = [100000000, 'day'];
+      unit = [60000, 'minute'];
+    } else if (t > -90000000) {
+      unit = [3600000, 'hour'];
+    } else if (t > -691200000) {
+      unit = [86400000, 'day'];
     } else if (t > -2629800000) {
-      unit = [1000000000, 'week'];
-    } else if (t > -31557600000) {
-      unit = [1000000000, 'month'];
-    } else if (t < -31557600000) {
-      unit = [10000000000, 'year'];
+      unit = [604800000, 'week'];
+    } else if (t > -34187400000) {
+      unit = [2628000000, 'month'];
+    } else if (t < -34187400000) {
+      unit = [31557600000, 'year'];
     }
 
     t = Math.trunc(t / unit[0]);
@@ -129,6 +129,8 @@ export default function Main({ navWidth, vWidth, row }) {
     })
     setContents(contents);
   }, [channelId, itemWidth, popularVideosData])
+  
+  console.log(relativeDateFormat(-2628800000));
   return (
     <div className="main" style={{ marginLeft: navWidth, width: vWidth - navWidth - 16 }} >
       {/* <HThumb /> */}
