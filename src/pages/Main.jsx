@@ -65,7 +65,6 @@ export default function Main({ navWidth, vWidth, row }) {
     axios.get(`https://www.googleapis.com/youtube/v3/videos?key=AIzaSyB6OW8e_Sw5L67oECpmbOs16FNeXgyCLs4&part=snippet,statistics,contentDetails&chart=mostPopular&regionCode=KR&maxResults=50&fields=items(id,statistics(viewCount),contentDetails(duration),snippet(publishedAt,channelId,title,thumbnails(standard(url))))`)
       .then(res => {
         let popularVideos = [...res.data.items];
-        console.log(popularVideos);
         setPopularVideosData(popularVideos);
         return popularVideos
       }).then(popularVideos => {
@@ -101,7 +100,6 @@ export default function Main({ navWidth, vWidth, row }) {
     if (channelId.length <= 0) return
     let copyData = [...popularVideosData].sort(() => Math.random() - 0.5);
     let contents = copyData.map(video => {
-      console.log(video);
       let channel = channelId.find(itm => video.snippet.channelId === itm.id);
       return (
         <div className="content" key={video.id} style={{ maxWidth: itemWidth }}>
@@ -116,7 +114,7 @@ export default function Main({ navWidth, vWidth, row }) {
                 <img src={channel.snippet.thumbnails.default.url} alt="" />
               </div>
               <div className="meta">
-                <div className="video-title" style={{maxWidth: itemWidth}}><span>{video.snippet.title}</span></div>
+                <div className="video-title" style={{ maxWidth: itemWidth }}><span>{video.snippet.title}</span></div>
                 <div className="channel-title">{channel.snippet.title}</div>
                 <div className="meta-video">
                   <span className="view-cnt">{video.statistics.viewCount ? viewFormat(video.statistics.viewCount) : ''}</span>

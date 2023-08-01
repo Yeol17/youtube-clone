@@ -35,13 +35,12 @@
     flex-wrap: wrap;
     top: 62px;
     z-index: 800;
-    margin: 10px 0;
+    margin: 20px 0;
     padding: 0 16px;
 
     .content {
       display: flex;
-      // flex: 1;
-      margin: 0 8px 60px 8px;
+      margin: 0 8px 48px 8px;
 
       .item {
 
@@ -99,11 +98,11 @@
               padding-right: 24px;
               font-size: 16px;
               line-height: 1.2rem;
+              max-height: 2.4em;
               color: $text-prime;
               display: block;
               overflow: hidden;
               text-overflow: ellipsis;
-              white-space: normal;
               display: -webkit-box;
               -webkit-line-clamp: 2;
               -webkit-box-orient: vertical;
