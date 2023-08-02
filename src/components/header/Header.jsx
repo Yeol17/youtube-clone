@@ -38,7 +38,7 @@ export default function Header({ onClickNavIcn }) {
     if (isSettingSub) return setIsSettingSub(false)
     setSettingSubType('');
   }
-
+  
   const onClickMenu = (more) => {
     setSettingMain(false);
     setSettingSubType(more);

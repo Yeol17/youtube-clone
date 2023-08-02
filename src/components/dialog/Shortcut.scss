@@ -23,6 +23,7 @@
     max-width: 1456px;
     max-height: calc(100vh - 144px);
     overflow: auto;
+    overscroll-behavior: contain;
 
     .container {
       flex-wrap: wrap;

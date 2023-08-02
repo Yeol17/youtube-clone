@@ -20,7 +20,7 @@ export default function Main({ navWidth, vWidth, row }) {
   const relativeDateFormat = (date) => {
     let unit;
     let t = (Number(new Date(date) - new Date()));
-    console.log(t);
+    
     if (t > -3600000) {
       unit = [60000, 'minute'];
     } else if (t > -90000000) {
@@ -51,12 +51,10 @@ export default function Main({ navWidth, vWidth, row }) {
   const durationFormat = (d) => {
     let time = d.split(/[A-Z]/d);
     time = time.filter(t => t !== '');
-    console.log(time);
     let newTime = time.map(t => {
       if (t.length === 1) return '0' + t
       return t
     });
-    console.log(newTime);
 
     return newTime.join(':');
   }
@@ -137,7 +135,6 @@ export default function Main({ navWidth, vWidth, row }) {
     setContents(contents);
   }, [channelId, itemWidth, popularVideosData])
 
-  console.log(relativeDateFormat(-2628800000));
   return (
     <div className="main" style={{ marginLeft: navWidth, width: vWidth - navWidth - 16 }} >
       {/* <HThumb /> */}
