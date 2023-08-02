@@ -51,7 +51,14 @@ export default function Main({ navWidth, vWidth, row }) {
   const durationFormat = (d) => {
     let time = d.split(/[A-Z]/d);
     time = time.filter(t => t !== '');
-    return time.join(':');
+    console.log(time);
+    let newTime = time.map(t => {
+      if (t.length === 1) return '0' + t
+      return t
+    });
+    console.log(newTime);
+
+    return newTime.join(':');
   }
 
   useEffect(() => {
@@ -129,7 +136,7 @@ export default function Main({ navWidth, vWidth, row }) {
     })
     setContents(contents);
   }, [channelId, itemWidth, popularVideosData])
-  
+
   console.log(relativeDateFormat(-2628800000));
   return (
     <div className="main" style={{ marginLeft: navWidth, width: vWidth - navWidth - 16 }} >
