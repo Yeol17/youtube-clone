@@ -26,39 +26,69 @@ export default function Header({ onClickNavIcn }) {
   let [isBackward, setIsBackward] = useState(false)
   let [settingSubType, setSettingSubType] = useState('');
   let [mode, setMode] = useState(false);
-  let [isSettingSub, setIsSettingSub] = useState(false);
+  let [mainOpened, setMainOpened] = useState(false);
+  let [isSub, setIsSub] = useState(false)
 
-  const onClickDocument = (e) => {
-    // document에 클릭 이벤트가 달려 있기 때문에
-    // 아래의 onClickBackward, onClickMenu 함수를 실행 후
-    // onClickDocument 함수가 실행되어 원치 않는 동작(설정 창들이 의도와 다르게 작동)을
-    // 제어하기 위해 isBackward, isSettingSub 와 같은 새로운 상태를 만들어 제어문을 작성 했다.
-    if (isBackward) return setIsBackward(false)
-    setSettingMain(false);
-    if (isSettingSub) return setIsSettingSub(false)
-    setSettingSubType('');
+
+  const onClickSetting = () => {
+    console.log('onClickSetting');
+    setSettingMain(!settingMain);
+    if (settingSubType) {
+      setSettingMain(false)
+      setSettingSubType('');
+    }
   }
-  
+  const onClickDoc = () => {
+    console.log('onClickDoc', mainOpened, isSub);
+    if (!isSub) {
+      if (!mainOpened) {
+        return
+      } else {
+        setSettingMain(false);
+      }
+      return
+    }
+    else {
+      setIsSub(false)
+      setSettingSubType('');
+    }
+  }
+
   const onClickMenu = (more) => {
     setSettingMain(false);
     setSettingSubType(more);
-    setIsSettingSub(true)
+    console.log('onClickMEnu');
   }
   const onClickBackward = () => {
     setIsBackward(true);
     setSettingMain(true);
     setSettingSubType('');
-
   }
   const onClickModeChange = (v) => {
     setMode(v);
   }
 
-  // 설정창 외부 클릭 시, 설정이 닫히게
   useEffect(() => {
-    document.addEventListener('click', onClickDocument);
-    return () => document.removeEventListener('click', onClickDocument)
-  },[])
+    document.addEventListener('click', onClickDoc);
+    return () => {
+      document.removeEventListener('click', onClickDoc)
+    }
+  }, [mainOpened, isSub])
+
+  useEffect(() => {
+    console.log('useEffect2');
+    if (settingMain) {
+      setMainOpened(true);
+    } else {
+      setMainOpened(false)
+    }
+
+    if (settingSubType) {
+      setIsSub(true)
+    } else {
+      setIsSub(false)
+    }
+  }, [settingMain, settingSubType])
 
   return (
     <>
@@ -85,13 +115,8 @@ export default function Header({ onClickNavIcn }) {
           <div className="end">
             <div className="settings">
 
-              <button type="button" className="btn--setting" onClick={(e) => {
-                e.stopPropagation();
-                setSettingMain(!settingMain);
-                if (!isSettingSub) {
-                  setIsSettingSub(false);
-                  setSettingSubType('');
-                }
+              <button type="button" className="btn--setting" onClick={() => {
+                onClickSetting()
               }}>
                 <AiOutlineMore />
               </button>
