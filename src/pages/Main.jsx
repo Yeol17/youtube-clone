@@ -20,7 +20,7 @@ export default function Main({ navWidth, vWidth, row }) {
   const relativeDateFormat = (date) => {
     let unit;
     let t = (Number(new Date(date) - new Date()));
-    
+
     if (t > -3600000) {
       unit = [60000, 'minute'];
     } else if (t > -90000000) {
@@ -67,17 +67,31 @@ export default function Main({ navWidth, vWidth, row }) {
   }, [vWidth, navWidth, row])
 
   useEffect(() => {
-    axios.get(`https://www.googleapis.com/youtube/v3/videos?key=AIzaSyB6OW8e_Sw5L67oECpmbOs16FNeXgyCLs4&part=snippet,statistics,contentDetails&chart=mostPopular&regionCode=KR&maxResults=50&fields=items(id,statistics(viewCount),contentDetails(duration),snippet(publishedAt,channelId,title,thumbnails(standard(url))))`)
-      .then(res => {
-        let popularVideos = [...res.data.items];
-        setPopularVideosData(popularVideos);
-        return popularVideos
-      }).then(popularVideos => {
-        let channelIds = popularVideos.map(itm => itm.snippet.channelId);
-        axios.get(`https://www.googleapis.com/youtube/v3/channels?key=AIzaSyB6OW8e_Sw5L67oECpmbOs16FNeXgyCLs4&part=snippet&id=${channelIds}&fields=items(id,snippet(title,thumbnails(default)))`)
-          .then(res => setChannelId(res.data.items));
-      }).catch(err => console.log(err))
-  }, []);
+    const apiReq = async () => {
+      const res = await axios.get(`https://www.googleapis.com/youtube/v3/videos?key=AIzaSyDuoLXZTC533FJEOuj7LzacYC_OadzainQ&part=snippet,statistics,contentDetails&chart=mostPopular&regionCode=KR&maxResults=50&fields=items(id,statistics(viewCount),contentDetails(duration),snippet(publishedAt,channelId,title,thumbnails(standard(url)))),nextPageToken`)
+      let nextPageToken = res.data.nextPageToken;
+      const popularVideosDatas = [...res.data.items];
+      console.log(popularVideosDatas);
+      const searchIds = popularVideosDatas.map(itm => itm.snippet.channelId);
+      const channelReq = await axios.get(`https://www.googleapis.com/youtube/v3/channels?key=AIzaSyDuoLXZTC533FJEOuj7LzacYC_OadzainQ&part=snippet&id=${searchIds.toString()}&fields=items(id,snippet(title,thumbnails(default)))`)
+      const channel = [...channelReq.data.items];
+      
+      for (let i = 2; i < 5; i++) {
+        const nextRes = await axios.get(`https://www.googleapis.com/youtube/v3/videos?key=AIzaSyDuoLXZTC533FJEOuj7LzacYC_OadzainQ&part=snippet,statistics,contentDetails&chart=mostPopular&regionCode=KR&maxResults=50&pageToken=${nextPageToken}&fields=items(id,statistics(viewCount),contentDetails(duration),snippet(publishedAt,channelId,title,thumbnails(standard(url)))),nextPageToken`)
+        nextPageToken = nextRes.data.nextPageToken;
+        popularVideosDatas.push(...nextRes.data.items);
+        const nextSearchIds = nextRes.data.items.map(itm => itm.snippet.channelId);
+        const nextChannelReq = await axios.get(`https://www.googleapis.com/youtube/v3/channels?key=AIzaSyDuoLXZTC533FJEOuj7LzacYC_OadzainQ&part=snippet&id=${nextSearchIds.toString()}&fields=items(id,snippet(title,thumbnails(default)))`)
+        channel.push(...nextChannelReq.data.items)
+        console.log(channel);
+      }
+
+      setPopularVideosData(popularVideosDatas);
+      setChannelId(channel);
+
+    };
+    apiReq();
+  }, [])
 
   // popularVideosDatas = [
   //   {
@@ -100,7 +114,9 @@ export default function Main({ navWidth, vWidth, row }) {
   //     }
   //   },
   //   .........
+  //  
   // ]
+
   useEffect(() => {
     if (channelId.length <= 0) return
     let copyData = [...popularVideosData].sort(() => Math.random() - 0.5);
@@ -155,7 +171,6 @@ export default function Main({ navWidth, vWidth, row }) {
 
 
 function Sort({ clickedSort, onClickSort }) {
-
   const sortLists = [
     { id: 0, title: '전체' },
     { id: 1, title: '조회수' },
@@ -173,7 +188,7 @@ function Sort({ clickedSort, onClickSort }) {
         {item.title}
       </div>
     )
-  })
+  });
 
   return (
     <div className="sorting">
@@ -182,35 +197,3 @@ function Sort({ clickedSort, onClickSort }) {
   )
 }
 
-// const tmp = document.addEventListener("DOMContentLoaded",
-//   function () {
-//     let lazyImages = [].slice
-//       .call(document.querySelectorAll("img.lazy"));
-//     let active = false;
-//     const lazyLoad = function () {
-//       if (active === false) {
-//         active = true;
-//         setTimeout(function () {
-//           lazyImages.forEach(function (lazyImage) {
-//             if ((lazyImage.getBoundingClientRect().top <= window.innerHeight && lazyImage.getBoundingClientRect().bottom >= 0) && getComputedStyle(lazyImage).display !== "none") {
-//               lazyImage.src = lazyImage.dataset.src;
-//               lazyImage.srcset = lazyImage.dataset.srcset;
-//               lazyImage.classList.remove("lazy");
-//               lazyImages = lazyImages.filter(function (image) {
-//                 return image !== lazyImage;
-//               });
-//               if (lazyImages.length === 0) {
-//                 document.removeEventListener("scroll", lazyLoad);
-//                 window.removeEventListener("resize", lazyLoad);
-//                 window.removeEventListener("orientationchange", lazyLoad);
-//               }
-//             }
-//           });
-//           active = false;
-//         }, 200);
-//       }
-//     };
-//     document.addEventListener("scroll", lazyLoad);
-//     window.addEventListener("resize", lazyLoad);
-//     window.addEventListener("orientationchange", lazyLoad);
-//   });
