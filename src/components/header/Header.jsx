@@ -76,7 +76,6 @@ export default function Header({ onClickNavIcn }) {
   }, [mainOpened, isSub])
 
   useEffect(() => {
-    console.log('useEffect2');
     if (settingMain) {
       setMainOpened(true);
     } else {
