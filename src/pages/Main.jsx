@@ -27,11 +27,8 @@ export default function Main({ navWidth, vWidth }) {
   useEffect(() => {
     let tmp = [];
     let data = [...popularVideosData].sort(() => Math.random() - 0.5);
-    console.log(data.length);
     for (let i = 0; 0 < data.length; i++) {
-      console.log(i);
       tmp.push(data.splice(0, 3))
-      console.log(data.length);
     }
     console.log(tmp);
     setShuffledData(tmp)
@@ -131,7 +128,7 @@ function Contents({
   const [rowData, setRowData] = useState([]);
   const [isVisible, setIsVisible] = useState(false);
   const { ref, inView } = useInView({
-    threshold: 0,
+    threshold: 0.2,
   })
 
   useEffect(() => {

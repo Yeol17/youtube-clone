@@ -2,7 +2,6 @@ import './App.scss';
 import Header from './components/header/Header'
 import Modal from './components/dialog/Modal'
 import Main from './pages/Main';
-import Watch from './pages/Watch';
 import { NavMax, NavMin } from './components/navigation/Nav'
 import { useSelector } from 'react-redux';
 import { Routes, Route } from 'react-router-dom';
