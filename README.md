@@ -1,5 +1,12 @@
 # 💾 유튜브 클론 코딩
-실제 서비스의 메인 페이지를 보며 최대한 비슷하게 구현
+실제 서비스의 메인 페이지를 보며 최대한 비슷하게 구현  
+<table>
+<tr>
+<td><img src="https://github.com/Yeol17/youtube-clone/assets/97844334/ac16b280-b9b6-405e-9424-2767e13f50e9" width="400px"></td>
+<td><img src="https://github.com/Yeol17/youtube-clone/assets/97844334/9a7052c2-7694-4529-bc26-35c3c01644f8" width="400px"></td>
+<td><img src="https://github.com/Yeol17/youtube-clone/assets/97844334/d6ae8503-b7ce-4017-9c1a-5a8a5cc11661" width="400px"></td>
+</tr>
+</table>
 
 ## 개요
 - 개인 프로젝트
