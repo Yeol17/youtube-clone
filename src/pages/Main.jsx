@@ -16,22 +16,26 @@ export default function Main({ navWidth, vWidth }) {
   let idx = 0;
 
   let cnt = new Array(Math.round(popularVideosData.length / row)).fill(1); // 66.6666... => 67
-  console.log(cnt);
   const onClickSort = (id) => {
     setClickedSort(id)
   };
 
   const onLoadContents = (cor) => {
-    console.log('실행됌');
-    console.log(cor);
-    console.log(shuffledData);
     setShuffledData(cor)
   }
 
   useEffect(() => {
+    let tmp = [];
     let data = [...popularVideosData].sort(() => Math.random() - 0.5);
-    console.log(data);
-    setShuffledData(data)
+    console.log(data.length);
+    for (let i = 0; 0 < data.length; i++) {
+      console.log(i);
+      tmp.push(data.splice(0, 3))
+      console.log(data.length);
+    }
+    console.log(tmp);
+    setShuffledData(tmp)
+
   }, [popularVideosData])
 
 
@@ -101,14 +105,14 @@ export default function Main({ navWidth, vWidth }) {
         />
       </div>
       <div className="contents-wrapper">
-        {cnt.map(() => {
+        {cnt.map((itm, i) => {
           return (
             <Contents
               key={idx++}
               row={row}
               channelId={channelId}
               itemWidth={itemWidth}
-              shuffledData={shuffledData}
+              shuffledData={shuffledData[i]}
               onLoadContents={onLoadContents}
             />
           )
@@ -122,28 +126,23 @@ function Contents({
   row,
   channelId,
   itemWidth,
-  onLoadContents
 }) {
   let idx = 0;
   const [rowData, setRowData] = useState([]);
   const [isVisible, setIsVisible] = useState(false);
   const { ref, inView } = useInView({
     threshold: 0,
-    rootMargin: '-200px'
   })
 
   useEffect(() => {
+    setRowData(shuffledData)
+  }, [shuffledData])
+  useEffect(() => {
     if (inView && !isVisible) {
       setIsVisible(true)
-      const copy = [...shuffledData].splice(0, 3);
-      setRowData(copy);
-      const cor = shuffledData.filter(data => {
-        return !copy.includes(data)
-      })
-      onLoadContents(cor);
-    } else {}
-  }, [isVisible, inView, shuffledData, onLoadContents])
-
+    }
+  }, [isVisible, inView])
+  // contents 를 이 곳에 67개 만들자
   return (
 
     <div className="contents" data-row={idx} key={idx++} ref={ref}>
@@ -190,9 +189,9 @@ function Sort({ clickedSort, onClickSort }) {
 }
 
 function OnloadContents({
-  rowData,
   channelId,
-  itemWidth
+  itemWidth,
+  rowData
 }) {
 
   const relativeDateFormat = (date) => {
@@ -236,7 +235,6 @@ function OnloadContents({
 
     return newTime.join(':');
   }
-
   const contents = rowData.map(video => {
     let channel = channelId.find(itm => video.snippet.channelId === itm.id);
     return (
