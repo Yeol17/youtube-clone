@@ -6,6 +6,7 @@ import { NavMax, NavMin } from './components/navigation/Nav'
 import { useSelector } from 'react-redux';
 import { Routes, Route } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import Unimplemented from './components/Unimplemented';
 
 
 
@@ -13,12 +14,15 @@ import { useEffect, useState } from 'react';
 function App() {
 
   const pages = [
-    '/',
     '/shorts',
-    '/feed',
-    '/channel/:id',
+    '/feed/:any',
+    '/channel/:any',
     '/gaming',
     '/premium',
+    '/music',
+    '/kids',
+    '/accounts',
+    '/reporthistory'
   ];
   // const iterableRoutes = pages.map(path => <Route path={path} element={<Container />} />);
 
@@ -114,7 +118,7 @@ function App() {
 
       <Routes>
         <Route path='/' element={<Main navWidth={navWidth} vWidth={vWidth} row={row} />} />
-        <Route path='*' element={<div>404</div>} />
+        <Route path='*' element={<Unimplemented />} />
       </Routes>
 
 
