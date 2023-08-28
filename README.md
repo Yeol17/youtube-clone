@@ -1,10 +1,12 @@
 # 💾 유튜브 클론 코딩
+  
 실제 서비스의 메인 페이지를 보며 최대한 비슷하게 구현  
+
 <table>
 <tr>
-<td><img src="https://github.com/Yeol17/youtube-clone/assets/97844334/ac16b280-b9b6-405e-9424-2767e13f50e9" width="400px"></td>
-<td><img src="https://github.com/Yeol17/youtube-clone/assets/97844334/9a7052c2-7694-4529-bc26-35c3c01644f8" width="400px"></td>
-<td><img src="https://github.com/Yeol17/youtube-clone/assets/97844334/d6ae8503-b7ce-4017-9c1a-5a8a5cc11661" width="400px"></td>
+<td><img src="https://github.com/Yeol17/youtube-clone/assets/97844334/3d96e392-fd61-4f45-98ee-8c1bec74b30e" width="400px"></td>
+<td><img src="https://github.com/Yeol17/youtube-clone/assets/97844334/87e1a38d-bab5-4144-b6dd-b489308a661a" width="400px"></td>
+<td><img src="https://github.com/Yeol17/youtube-clone/assets/97844334/528a64a2-8517-4437-8535-70843e9d5f46" width="400px"></td>
 </tr>
 </table>
 
@@ -25,35 +27,32 @@
 <table>
   <tr>
     <td>
-      <img src="https://github.com/Yeol17/youtube-clone/assets/97844334/a43aad20-9866-4177-a844-7db023085e8c" width="150px"
+      <img src="https://github.com/Yeol17/youtube-clone/assets/97844334/cd68f282-c47c-4ace-a773-b53899dab099" width="150px"
     </td>
       <td>
-        <img src="https://github.com/Yeol17/youtube-clone/assets/97844334/ab09aa1e-9e3e-4afd-8007-84e4d2fb8d78" width="150px">
+        <img src="https://github.com/Yeol17/youtube-clone/assets/97844334/b0f78aa4-ed03-4e73-bd6d-c6fabc09e885" width="150px">
       </td>
     <td>
-      <img src="https://github.com/Yeol17/youtube-clone/assets/97844334/b17689d6-59da-4a08-b335-3f7963f67950" width="150px">
+      <img src="https://github.com/Yeol17/youtube-clone/assets/97844334/c9194f6a-092d-459f-8e1b-b5e0cc9d3eb7" width="150px">
     </td>
     <td>
-      <img src="https://github.com/Yeol17/youtube-clone/assets/97844334/94796f77-1a4d-4b53-a3d4-8629f81d0120" width="150px">
+      <img src="https://github.com/Yeol17/youtube-clone/assets/97844334/e65ab8ad-05a9-4fee-9c02-ef9ebae6ff9f" width="150px">
     </td>
   </tr>
 </table>
 
 
-## 개발 내용 과 느낀점
+## 개발 내용
 ### REST API  
-axios로 리소스를 요청해 응답받은 결과(max=50)로 채널의 정보에 대한 리소스를 재요청.  
-요청한 리소스에 nextPageToken이라는 값을 이용해 재요청을 해서 200개의 리소스를 확보해서 화면에 렌더링.  
+axios로 API 요청해 응답 받은 가장 인기 있는 영상들에 대한 리소스(max=50)로 채널에 대한 리소스를 재요청합니다.
+이 같은 방식으로 요청한 리소스에 nextPageToken값으로 3번의 호출 통해 200개의 리소스를 확보해서 화면에 렌더링 했습니다.
 
-**느낀점**  
-  비동기 요청한 결과를 useState로 바꾸려고 해도 상태가 바뀌지 않아 난항을 겪었습니다.  
-  그래서 동기/비동기에 대해 살펴 보았고 비동기의 후속 처리를 위해 콜백 패턴을 사용하는데 이 때 콜백 패턴의 뎁스가 깊어지면 그 유명한 콜백헬이라는 개념이 여기에서 비롯된 거라는걸 알았습니다.
-  그래서 이 문제를 해결 하기 위한게 Promise, Promise의 후속 처리 메서드(then, catch)이지만 콜백 패턴을 벗어나지 못하고 이를 좀 더 개선한것이 async/await라는걸 알았습니다.  
-  키워드로만 공부했을 때는 이해도 쉽지 않고 금새 잊혀지는데 직접 구현을 통해 문제를 겪어보니 이해의 정도가 이론만 공부했을 때보다는 수 배는 더 높았습니다.
-  
-### Lazy load  
-  우선 공통의 공백 컴포넌트를 렌더링하고 Intersection observer를 활용해 기준점인 뷰포트에 타겟인 요소가 교차하면 이를 감지해 데이터가 있는 컴포넌트를 렌더링 합니다.
+### 컴포넌트 레이지 로드
+우선 공통의 공백 컴포넌트를 렌더링하고 Intersection observer를 활용해 기준점인 뷰포트에 타겟인 요소가 교차하면 이를 감지해 데이터가 있는 컴포넌트를 렌더링 합니다.
 
-**느낀점**
-  맨처음 렌더링 시, 한 줄에 3개 총 2줄이 렌더링 되는데 이 두 줄에 같은 데이터가 들어오는 상황이 발생했다.
-  익숙하지 않은 api라 사용법의 문제인지 아니면 컴포넌트의 구조상의 문제인지 헤맸는데 
+### 설정 메뉴
+우측 상단 설정 아이콘을 클릭하면 메뉴가 뜨고 [위치: 한국] 과 같이 선택된 값을 반영하도록 부제가 있는 항목들은 redux를 활용해 상태의 초깃값을 설정해 줬습니다.
+이 메뉴들을 클릭하면 위치 같은 경우 각 국가들을 선택하는 창이 뜨는데 "스페인" 클릭 시 [위치: 스페인] 과 같이 바뀌게 됩니다.
+실제로 표현 언어가 바뀌는 다국어 처리는 향후 개발 예정입니다.
+
+
