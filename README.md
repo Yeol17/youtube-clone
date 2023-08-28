@@ -4,9 +4,9 @@
 
 <table>
 <tr>
-<td><img src="https://github.com/Yeol17/youtube-clone/assets/97844334/3d96e392-fd61-4f45-98ee-8c1bec74b30e" width="400px"></td>
-<td><img src="https://github.com/Yeol17/youtube-clone/assets/97844334/87e1a38d-bab5-4144-b6dd-b489308a661a" width="400px"></td>
-<td><img src="https://github.com/Yeol17/youtube-clone/assets/97844334/528a64a2-8517-4437-8535-70843e9d5f46" width="400px"></td>
+<td><img src="https://github.com/Yeol17/youtube-clone/assets/97844334/00e08daa-0de9-437a-a44a-1b27413e335e" width="400px"></td>
+<td><img src="https://github.com/Yeol17/youtube-clone/assets/97844334/e51076c1-4d9d-4131-8651-cad25958e25d" width="400px"></td>
+<td><img src="https://github.com/Yeol17/youtube-clone/assets/97844334/3de0babc-f70c-43b7-b095-67473bfa6eb6" width="400px"></td>
 </tr>
 </table>
 
