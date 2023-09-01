@@ -1,4 +1,5 @@
 {
+  "homepage": " https://yeol17.github.io/portpolio-ytb/",
   "name": "youtube-clone",
   "version": "0.1.0",
   "private": true,
@@ -44,5 +45,4 @@
       "last 1 safari version"
     ]
   },
-  "homepage": "http://ytb-clone.com"
 }
