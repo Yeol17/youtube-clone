@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/portpolio-ytb/static/css/main.70e1dd46.css",
-    "main.js": "/portpolio-ytb/static/js/main.52d08be7.js",
-    "static/js/787.df02e639.chunk.js": "/portpolio-ytb/static/js/787.df02e639.chunk.js",
-    "index.html": "/portpolio-ytb/index.html",
-    "main.70e1dd46.css.map": "/portpolio-ytb/static/css/main.70e1dd46.css.map",
-    "main.52d08be7.js.map": "/portpolio-ytb/static/js/main.52d08be7.js.map",
-    "787.df02e639.chunk.js.map": "/portpolio-ytb/static/js/787.df02e639.chunk.js.map"
+    "main.css": "./static/css/main.70e1dd46.css",
+    "main.js": "./static/js/main.a7c36831.js",
+    "static/js/787.df02e639.chunk.js": "./static/js/787.df02e639.chunk.js",
+    "index.html": "./index.html",
+    "main.70e1dd46.css.map": "./static/css/main.70e1dd46.css.map",
+    "main.a7c36831.js.map": "./static/js/main.a7c36831.js.map",
+    "787.df02e639.chunk.js.map": "./static/js/787.df02e639.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.70e1dd46.css",
-    "static/js/main.52d08be7.js"
+    "static/js/main.a7c36831.js"
   ]
 }

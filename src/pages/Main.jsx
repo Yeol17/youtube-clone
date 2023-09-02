@@ -30,7 +30,6 @@ export default function Main({ navWidth, vWidth }) {
     for (let i = 0; 0 < data.length; i++) {
       tmp.push(data.splice(0, 3))
     }
-    console.log(tmp);
     setShuffledData(tmp)
 
   }, [popularVideosData])
