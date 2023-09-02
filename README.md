@@ -1,5 +1,7 @@
 # 💾 유튜브 클론 코딩
-  
+
+https://yeol17.github.io/youtube-clone/
+
 실제 서비스의 메인 페이지를 보며 최대한 비슷하게 구현  
 
 <table>
