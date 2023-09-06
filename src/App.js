@@ -54,12 +54,21 @@ function App() {
     }
   }
 
+  const onResizeVwidth = (w) => {
+    if (w > 1024) return 3
+    if (w > 768) return 2
+    if (w > 319) return 1
+  }
   const onResized = () => {
     clearTimeout(timer);
     timer = setTimeout(() => {
       setVWidth(window.innerWidth);
     }, 300)
   };
+
+  useEffect(() => {
+    setRow(onResizeVwidth(vWidth))
+  }, [vWidth, row])
 
   useEffect(() => {
     if (vWidth > 1312) {

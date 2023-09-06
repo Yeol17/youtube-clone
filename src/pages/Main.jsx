@@ -5,8 +5,7 @@ import { Link } from 'react-router-dom';
 import { useInView } from 'react-intersection-observer';
 
 
-export default function Main({ navWidth, vWidth }) {
-  const [row, setRow] = useState(3);
+export default function Main({ navWidth, vWidth, row }) {
   const [itemWidth, setItemWidth] = useState(0);
   const [clickedSort, setClickedSort] = useState(0);
   const [popularVideosData, setPopularVideosData] = useState([]);
@@ -28,11 +27,11 @@ export default function Main({ navWidth, vWidth }) {
     let tmp = [];
     let data = [...popularVideosData].sort(() => Math.random() - 0.5);
     for (let i = 0; 0 < data.length; i++) {
-      tmp.push(data.splice(0, 3))
+      tmp.push(data.splice(0, row))
     }
     setShuffledData(tmp)
 
-  }, [popularVideosData])
+  }, [popularVideosData, row])
 
 
   useEffect(() => {
@@ -51,7 +50,7 @@ export default function Main({ navWidth, vWidth }) {
       const channelReq = await axios.get(`https://www.googleapis.com/youtube/v3/channels?key=AIzaSyDuoLXZTC533FJEOuj7LzacYC_OadzainQ&part=snippet&id=${searchIds.toString()}&fields=items(id,snippet(title,thumbnails(default)))`)
       const channel = [...channelReq.data.items];
 
-      for (let i = 2; i < 5; i++) {
+      for (let i = 0; i < 3; i++) {
         const nextRes = await axios.get(`https://www.googleapis.com/youtube/v3/videos?key=AIzaSyDuoLXZTC533FJEOuj7LzacYC_OadzainQ&part=snippet,statistics,contentDetails&chart=mostPopular&regionCode=KR&maxResults=50&pageToken=${nextPageToken}&fields=items(id,statistics(viewCount),contentDetails(duration),snippet(publishedAt,channelId,title,thumbnails(standard(url)))),nextPageToken`)
         nextPageToken = nextRes.data.nextPageToken;
         popularVideos.push(...nextRes.data.items);
@@ -138,7 +137,6 @@ function Contents({
       setIsVisible(true)
     }
   }, [isVisible, inView])
-  // contents 를 이 곳에 67개 만들자
   return (
 
     <div className="contents" data-row={idx} key={idx++} ref={ref}>
@@ -155,6 +153,7 @@ function Contents({
     </div>
   )
 }
+
 /////////////////////////////////////////////////////////////////
 
 function Sort({ clickedSort, onClickSort }) {
