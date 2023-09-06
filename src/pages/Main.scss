@@ -15,10 +15,10 @@
             display: flex;
             margin-left: 8px;
             .sort {
-                @include btn(10px, auto, 8px, $btnBgHov);
+                @include btn(0, auto, 8px, $btnBgHov);
                 background-color: $btnBg;
-                padding: 8px 10px;
-                margin: 16px;
+                margin: 12px;
+                padding: 6px 12px;
                 margin-right: 0;
                 &.selected {
                     background-color: rgba(0, 0, 0, 0.9);

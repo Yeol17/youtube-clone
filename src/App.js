@@ -48,9 +48,8 @@ function App() {
       setNavType('min');
     } else if (navType === 'min') {
       if (vWidth <= 1024) {
-        setNavType('modal');
-        return
-      } 
+        return setNavType('modal');
+      }
       setNavType('extend');
     } else if (navType === 'modal') {
       if (vWidth < 768) {
@@ -112,7 +111,10 @@ function App() {
   }, [navType])
 
   useEffect(() => {
-    if (navType === 'hidden' || vWidth < 767) return
+    if (navType === 'hidden') return
+    if (vWidth < 767) {
+      return setNav(null)
+    }
     const lazyLoadNav = setTimeout(() => {
       setNav(<NavMin />)
     }, 300)
