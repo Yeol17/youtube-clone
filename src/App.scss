@@ -2,58 +2,59 @@
 // .App {
 //   overflow-y: scroll;
 // }
-
 $text-prime: #0f0f0f;
 $text-end: #606060;
-
 $navMinWidth: 72px;
 $navMaxWidth: 240px;
 $SearchBarHeight: 56px;
 $btnBg: #f1f1f1;
-$btnBgHov: rgba(0,0,0,0.1);
-
+$btnBgHov: rgba(0, 0, 0, 0.1);
 body {
-  font: {
-    size: 14px;
-  }
-  color: #333;
+    font: {
+        size: 14px;
+    }
+    color: #333;
 }
 
 button {
-  all: unset;
-  cursor: pointer;
+    all: unset;
+    cursor: pointer;
 }
+
 
 /* 스크롤바 가로 사이즈 */
+
 ::-webkit-scrollbar {
-  width: 16px;
+    width: 16px;
 }
+
 
 /* 스크롤바 막대기 */
+
 ::-webkit-scrollbar-thumb {
-  background-color: #aaa;
-  border: 4px solid #fff;
-  border-radius: 8px;
+    background-color: #aaa;
+    border: 4px solid #fff;
+    border-radius: 8px;
 }
+
 
 /* 스크롤바 백그라운드 */
+
 ::-webkit-scrollbar-track {
-  background-color: #fff;
+    background-color: #fff;
 }
 
-
-@mixin btn($w, $h,$radius, $bgHover) {
-  min-width: $w;
-  height: $h;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: $radius;
-  box-sizing: border-box;
-  cursor: pointer;
-  transition: all .3s;
-
-  &:hover {
-    background-color: $bgHover
-  }
+@mixin btn($w, $h, $radius, $bgHover) {
+    min-width: $w;
+    height: $h;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: $radius;
+    box-sizing: border-box;
+    cursor: pointer;
+    transition: all .3s;
+    &:hover {
+        background-color: $bgHover
+    }
 }

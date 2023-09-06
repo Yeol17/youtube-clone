@@ -1,153 +1,130 @@
 @import '../App.scss';
-
 .main {
-  display: flex;
-  flex-direction: column;
-  margin-top: 50px;
-
-  .unload {
-    background-color: #f1f1f1;
-  }
-  .sorting-wrapper {
-    position: fixed;
-    background-color: #fff;
-    width: 100%;
-    z-index: 810;
-
-    .sorting {
-      display: flex;
-      margin-left: 8px;
-
-      .sort {
-        @include btn(0, auto, 8px, $btnBgHov);
-        background-color: $btnBg;
-        padding: 8px 10px;
-        margin: 16px;
-        margin-right: 0;
-
-        &.selected {
-          background-color: rgba(0, 0, 0, 0.9);
-          color: #fff;
-        }
-      }
+    display: flex;
+    flex-direction: column;
+    margin-top: 50px;
+    .unload {
+        background-color: #f1f1f1;
     }
-  }
-
-  .contents-wrapper {
-    position: relative;
-    display: inline-flex;
-    flex-wrap: wrap;
-    top: 62px;
-    z-index: 800;
-    margin: 20px 0;
-
-    .contents {
-      display: flex;
-      margin: 0 16px;
-
-      .content {
-        margin: 0 8px 48px;
-
-        .item {
-
-          .thumb-nail {
+    .sorting-wrapper {
+        position: fixed;
+        background-color: #fff;
+        width: 100%;
+        z-index: 810;
+        .sorting {
             display: flex;
-            border-radius: 12px;
-            overflow: hidden;
-            width: 100%;
-            position: relative;
-
-            img {
-              width: 100%;
-              height: 100%;
-              object-fit: cover;
-              background-color: transparent;
-            }
-
-            .duration {
-              background-color: $text-prime;
-              font-size: 0.8rem;
-              color: #fff;
-              font-weight: 700;
-              line-height: 1.2rem;
-              padding: 0 3px;
-              position: absolute;
-              bottom: 4px;
-              right: 3px;
-              border-radius: 4px;
-            }
-          }
-
-          .details {
-            display: flex;
-            flex-wrap: nowrap;
-            margin-top: 10px;
-
-            .channel-avatar {
-              max-width: 36px;
-              max-height: 36px;
-              margin-right: 10px;
-
-              &.unload {
-                min-width: 36px;
-                min-height: 36px;
-                border-radius: 50%;
-              }
-
-              img {
-                display: block;
-                width: 100%;
-                height: 100%;
-                object-fit: cover;
-                border-radius: 50%;
-              }
-            }
-
-            .meta {
-              flex-direction: column;
-              width: 80%;
-
-              .video-title {
-                padding-right: 24px;
-                font-size: 16px;
-                line-height: 1.2rem;
-                max-height: 2.4em;
-                color: $text-prime;
-                overflow: hidden;
-                text-overflow: ellipsis;
-                display: -webkit-box;
-                -webkit-line-clamp: 2;
-                -webkit-box-orient: vertical;
-
-                &.unload {
-                  min-width: 100%;
-                  min-height: 16px;
-                  border-radius: 4px;
+            margin-left: 8px;
+            .sort {
+                @include btn(10px, auto, 8px, $btnBgHov);
+                background-color: $btnBg;
+                padding: 8px 10px;
+                margin: 16px;
+                margin-right: 0;
+                &.selected {
+                    background-color: rgba(0, 0, 0, 0.9);
+                    color: #fff;
                 }
-              }
-
-              .channel-title {
-                color: $text-end;
-                margin-top: 8px;
-
-                &.unload {
-                  max-width: 50%;
-                  min-height: 16px;
-                }
-              }
-
-              .meta-video {
-                color: $text-end;
-                margin-top: 6px;
-
-                .seperator {
-                  margin: 0 4px;
-                }
-              }
             }
-          }
         }
-      }
     }
-  }
+    .contents-wrapper {
+        position: relative;
+        display: inline-flex;
+        flex-wrap: wrap;
+        top: 62px;
+        z-index: 800;
+        margin: 20px 0;
+        .contents {
+            display: flex;
+            margin: 0 16px;
+            .content {
+                margin: 0 8px 48px;
+                .item {
+                    .thumb-nail {
+                        display: flex;
+                        border-radius: 12px;
+                        overflow: hidden;
+                        width: 100%;
+                        position: relative;
+                        img {
+                            width: 100%;
+                            height: 100%;
+                            object-fit: cover;
+                            background-color: transparent;
+                        }
+                        .duration {
+                            background-color: $text-prime;
+                            font-size: 0.8rem;
+                            color: #fff;
+                            font-weight: 700;
+                            line-height: 1.2rem;
+                            padding: 0 3px;
+                            position: absolute;
+                            bottom: 4px;
+                            right: 3px;
+                            border-radius: 4px;
+                        }
+                    }
+                    .details {
+                        display: flex;
+                        flex-wrap: nowrap;
+                        margin-top: 10px;
+                        .channel-avatar {
+                            max-width: 36px;
+                            max-height: 36px;
+                            margin-right: 10px;
+                            &.unload {
+                                min-width: 36px;
+                                min-height: 36px;
+                                border-radius: 50%;
+                            }
+                            img {
+                                display: block;
+                                width: 100%;
+                                height: 100%;
+                                object-fit: cover;
+                                border-radius: 50%;
+                            }
+                        }
+                        .meta {
+                            flex-direction: column;
+                            width: 80%;
+                            .video-title {
+                                padding-right: 24px;
+                                font-size: 16px;
+                                line-height: 1.2rem;
+                                max-height: 2.4em;
+                                color: $text-prime;
+                                overflow: hidden;
+                                text-overflow: ellipsis;
+                                display: -webkit-box;
+                                -webkit-line-clamp: 2;
+                                -webkit-box-orient: vertical;
+                                &.unload {
+                                    min-width: 100%;
+                                    min-height: 16px;
+                                    border-radius: 4px;
+                                }
+                            }
+                            .channel-title {
+                                color: $text-end;
+                                margin-top: 8px;
+                                &.unload {
+                                    max-width: 50%;
+                                    min-height: 16px;
+                                }
+                            }
+                            .meta-video {
+                                color: $text-end;
+                                margin-top: 6px;
+                                .seperator {
+                                    margin: 0 4px;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
 }

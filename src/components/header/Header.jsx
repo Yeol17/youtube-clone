@@ -39,7 +39,6 @@ export default function Header({ onClickNavIcn }) {
     }
   }
   const onClickDoc = () => {
-    console.log('onClickDoc', mainOpened, isSub);
     if (!isSub) {
       if (!mainOpened) {
         return
@@ -57,7 +56,6 @@ export default function Header({ onClickNavIcn }) {
   const onClickMenu = (more) => {
     setSettingMain(false);
     setSettingSubType(more);
-    console.log('onClickMEnu');
   }
   const onClickBackward = () => {
     setIsBackward(true);

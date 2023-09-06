@@ -13,17 +13,17 @@ import Unimplemented from './components/Unimplemented';
 
 function App() {
 
-  const pages = [
-    '/shorts',
-    '/feed/:any',
-    '/channel/:any',
-    '/gaming',
-    '/premium',
-    '/music',
-    '/kids',
-    '/accounts',
-    '/reporthistory'
-  ];
+  // const pages = [
+  //   '/shorts',
+  //   '/feed/:any',
+  //   '/channel/:any',
+  //   '/gaming',
+  //   '/premium',
+  //   '/music',
+  //   '/kids',
+  //   '/accounts',
+  //   '/reporthistory'
+  // ];
   // const iterableRoutes = pages.map(path => <Route path={path} element={<Container />} />);
 
   let timer = null;
@@ -33,8 +33,11 @@ function App() {
 
   let [row, setRow] = useState(3);
   let [vWidth, setVWidth] = useState(window.innerWidth);
-  let [navType, setNavType] = useState('');
+  let [navType, setNavType] = useState(null);
   let [navWidth, setNavWidth] = useState(0);
+
+  console.log(navWidth);
+  console.log(navType);
 
   const onClickBG = () => {
     setNavType('min');
@@ -44,17 +47,26 @@ function App() {
     if (navType === 'extend') {
       setNavType('min');
     } else if (navType === 'min') {
-      if (vWidth < 1313) {
+      if (vWidth <= 1024) {
         setNavType('modal');
         return
-      }
+      } 
       setNavType('extend');
     } else if (navType === 'modal') {
+      if (vWidth < 768) {
+        setNavType('hidden')
+        setNavWidth(0);
+        return
+      }
       setNavType('min');
+    } else if (navType === 'hidden') {
+      setNavType('modal');
     }
   }
 
   const onResizeVwidth = (w) => {
+    if (w > 1680) return 5
+    if (w > 1280) return 4
     if (w > 1024) return 3
     if (w > 768) return 2
     if (w > 319) return 1
@@ -71,10 +83,14 @@ function App() {
   }, [vWidth, row])
 
   useEffect(() => {
-    if (vWidth > 1312) {
-      setNavType('extend');
-    } else {
+    if (vWidth >= 1280) {
       setNavType('min');
+    } else if (vWidth >= 1024) {
+      setNavType('min');
+    } else if (vWidth >= 768) {
+      setNavType('min');
+    } else {
+      setNavType('hidden')
     }
   }, [vWidth])
 
@@ -90,17 +106,20 @@ function App() {
       setNavWidth(72);
     } else if (navType === 'extend') {
       setNavWidth(240);
+    } else if (navType === 'hidden') {
+      setNavWidth(0)
     }
   }, [navType])
 
   useEffect(() => {
+    if (navType === 'hidden' || vWidth < 767) return
     const lazyLoadNav = setTimeout(() => {
       setNav(<NavMin />)
     }, 300)
     return () => {
       clearTimeout(lazyLoadNav);
     }
-  }, [])
+  }, [navType, vWidth])
 
   // useEffect(() => {
   //   axios.get('https://www.googleapis.com/youtube/v3/videos?key=AIzaSyDuoLXZTC533FJEOuj7LzacYC_OadzainQ&chart=mostPopular&part=snippet,contentDetails,statistics,status&regionCode=KR&maxResults=3')
