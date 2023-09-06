@@ -25,9 +25,9 @@ export default function Main({ navWidth, vWidth, row }) {
 
   useEffect(() => {
     let tmp = [];
-    let data = [...popularVideosData].sort(() => Math.random() - 0.5);
-    for (let i = 0; 0 < data.length; i++) {
-      tmp.push(data.splice(0, row))
+    let copy = [...popularVideosData]
+    for (let i = 0; 0 < copy.length; i++) {
+      tmp.push(copy.splice(0, row))
     }
     setShuffledData(tmp)
 
@@ -43,6 +43,7 @@ export default function Main({ navWidth, vWidth, row }) {
 
   useEffect(() => {
     const apiReq = async () => {
+      console.log('axios');
       const res = await axios.get(`https://www.googleapis.com/youtube/v3/videos?key=AIzaSyDuoLXZTC533FJEOuj7LzacYC_OadzainQ&part=snippet,statistics,contentDetails&chart=mostPopular&regionCode=KR&maxResults=50&fields=items(id,statistics(viewCount),contentDetails(duration),snippet(publishedAt,channelId,title,thumbnails(standard(url)))),nextPageToken`)
       let nextPageToken = res.data.nextPageToken;
       const popularVideos = [...res.data.items];
@@ -59,7 +60,9 @@ export default function Main({ navWidth, vWidth, row }) {
         channel.push(...nextChannelReq.data.items)
       }
 
-      setPopularVideosData(popularVideos);
+
+      let data = [...popularVideos].sort(() => Math.random() - 0.5);
+      setPopularVideosData(data);
       setChannelId(channel);
     };
 

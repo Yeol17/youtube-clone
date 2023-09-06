@@ -36,9 +36,6 @@ function App() {
   let [navType, setNavType] = useState(null);
   let [navWidth, setNavWidth] = useState(0);
 
-  console.log(navWidth);
-  console.log(navType);
-
   const onClickBG = () => {
     setNavType('min');
   }
@@ -129,7 +126,7 @@ function App() {
   //     console.log(res.data);
   //   }).catch(err => console.log(err));
   // },[])
-
+  console.log(1);
   return (
     <div className="App">
 
