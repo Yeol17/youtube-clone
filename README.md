@@ -11,9 +11,9 @@ https://yeol17.github.io/youtube-clone/
 ## 개요
 - 개인 프로젝트
 - 23.06 ~
-- [개발 내용](https://1sy.notion.site/Youtube-3d83a0bcde9240ac9876d99dcc268cf0?pvs=4)
+- [개발 문서](https://1sy.notion.site/Youtube-3d83a0bcde9240ac9876d99dcc268cf0?pvs=4)
 
-
+## 개발 내용
 
 ### REST API  
 - Axios + async/await 문법을 사용해 동영상의 정보, 동영상이 올라온 채널의 정보를 요청합니다.
