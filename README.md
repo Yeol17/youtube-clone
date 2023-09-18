@@ -11,24 +11,9 @@ https://yeol17.github.io/youtube-clone/
 ## 개요
 - 개인 프로젝트
 - 23.06 ~
+- [개발 내용](https://1sy.notion.site/Youtube-3d83a0bcde9240ac9876d99dcc268cf0?pvs=4)
 
 
-## 프로젝트 목적
-- 리액트 사용 경험과 숙련도 향상
-- Redux를 이용한 상태관리를 경험
-- SCSS 의 사용 경험
-- Axios를 사용해 REST API 호출을 해보고 응답받은 리소스를 다루어 보기
-
-
-## Skills
-|React|Redux|SCSS|AXIOS|
-|---|---|---|---|
-|<img src="https://github.com/Yeol17/youtube-clone/assets/97844334/cd68f282-c47c-4ace-a773-b53899dab099" width="150px">|<img src="https://github.com/Yeol17/youtube-clone/assets/97844334/b0f78aa4-ed03-4e73-bd6d-c6fabc09e885" width="150px">|<img src="https://github.com/Yeol17/youtube-clone/assets/97844334/c9194f6a-092d-459f-8e1b-b5e0cc9d3eb7" width="150px">|<img src="https://github.com/Yeol17/youtube-clone/assets/97844334/e65ab8ad-05a9-4fee-9c02-ef9ebae6ff9f" width="150px">|
-
-
-## 개발 내용
-
-https://1sy.notion.site/Youtube-3d83a0bcde9240ac9876d99dcc268cf0?pvs=4
 
 ### REST API  
 - Axios + async/await 문법을 사용해 동영상의 정보, 동영상이 올라온 채널의 정보를 요청합니다.
