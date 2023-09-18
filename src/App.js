@@ -13,19 +13,6 @@ import Unimplemented from './components/Unimplemented';
 
 function App() {
 
-  // const pages = [
-  //   '/shorts',
-  //   '/feed/:any',
-  //   '/channel/:any',
-  //   '/gaming',
-  //   '/premium',
-  //   '/music',
-  //   '/kids',
-  //   '/accounts',
-  //   '/reporthistory'
-  // ];
-  // const iterableRoutes = pages.map(path => <Route path={path} element={<Container />} />);
-
   let timer = null;
   let [nav, setNav] = useState('');
 
@@ -37,19 +24,23 @@ function App() {
   let [navWidth, setNavWidth] = useState(0);
 
   const onClickBG = () => {
-    setNavType('min');
+    if(vWidth < 790) {
+      setNavType('hidden');
+    } else {
+      setNavType('min');
+    }
   }
 
   const onClickNavIcn = () => {
     if (navType === 'extend') {
       setNavType('min');
     } else if (navType === 'min') {
-      if (vWidth <= 1024) {
+      if (vWidth < 1400) {
         return setNavType('modal');
       }
       setNavType('extend');
     } else if (navType === 'modal') {
-      if (vWidth < 768) {
+      if (vWidth < 790) {
         setNavType('hidden')
         setNavWidth(0);
         return
@@ -61,11 +52,11 @@ function App() {
   }
 
   const onResizeVwidth = (w) => {
-    if (w > 1680) return 5
-    if (w > 1280) return 4
-    if (w > 1024) return 3
-    if (w > 768) return 2
-    if (w > 319) return 1
+    if (w > 1902) return 5
+    if (w > 1576) return 4
+    if (w > 1096) return 3
+    if (w >= 700) return 2
+    if( w < 700) return 1
   }
   const onResized = () => {
     clearTimeout(timer);
@@ -78,12 +69,11 @@ function App() {
     setRow(onResizeVwidth(vWidth))
   }, [vWidth, row])
 
+  // navType = ['extend', 'min', 'modal', hidden']
   useEffect(() => {
-    if (vWidth >= 1280) {
-      setNavType('min');
-    } else if (vWidth >= 1024) {
-      setNavType('min');
-    } else if (vWidth >= 768) {
+    if (vWidth >= 1400) { // 데스크탑
+      setNavType('extend');
+    } else if (vWidth > 790) { // 테블릿
       setNavType('min');
     } else {
       setNavType('hidden')
@@ -108,7 +98,7 @@ function App() {
   }, [navType])
 
   useEffect(() => {
-    if (navType === 'hidden') return
+    if (navType === 'hidden') return 
     if (vWidth < 767) {
       return setNav(null)
     }
@@ -120,13 +110,6 @@ function App() {
     }
   }, [navType, vWidth])
 
-  // useEffect(() => {
-  //   axios.get('https://www.googleapis.com/youtube/v3/videos?key=AIzaSyDuoLXZTC533FJEOuj7LzacYC_OadzainQ&chart=mostPopular&part=snippet,contentDetails,statistics,status&regionCode=KR&maxResults=3')
-  //   .then(res => {
-  //     console.log(res.data);
-  //   }).catch(err => console.log(err));
-  // },[])
-  console.log(1);
   return (
     <div className="App">
 
