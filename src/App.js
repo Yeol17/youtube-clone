@@ -6,9 +6,7 @@ import { NavMax, NavMin } from './components/navigation/Nav'
 import { useSelector } from 'react-redux';
 import { Routes, Route } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import Unimplemented from './components/Unimplemented';
-
-
+import ErrorPage from './components/ErrorPage';
 
 
 function App() {
@@ -128,7 +126,7 @@ function App() {
 
       <Routes>
         <Route path='/' element={<Main navWidth={navWidth} vWidth={vWidth} row={row} />} />
-        <Route path='*' element={<Unimplemented />} />
+        <Route path='*' element={<ErrorPage navWidth={navWidth} vWidth={vWidth}/>} />
       </Routes>
 
 
