@@ -13,8 +13,8 @@ export default function Main({ navWidth, vWidth, row }) {
   const [channelId, setChannelId] = useState([]);
 
   let idx = 0;
-
   let cnt = new Array(Math.round(popularVideosData.length / row)).fill(1); // 66.6666... => 67
+
   const onClickSort = (id) => {
     setClickedSort(id)
   };

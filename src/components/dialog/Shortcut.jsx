@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { shortcutChange } from '../../store/popUpStateSlice';
 export default function Shortcut() {
 
-  let [contentHeight, setContHeight] = useState(0);
+  const [contentHeight, setContHeight] = useState(0);
   
   const dispatch = useDispatch();
   const onResized = (e) => {

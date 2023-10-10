@@ -12,14 +12,12 @@ import ErrorPage from './components/ErrorPage';
 function App() {
 
   let timer = null;
-  let [nav, setNav] = useState('');
-
-  let popUp = useSelector(state => state.popUp);
-
-  let [row, setRow] = useState(3);
-  let [vWidth, setVWidth] = useState(window.innerWidth);
-  let [navType, setNavType] = useState(null);
-  let [navWidth, setNavWidth] = useState(0);
+  const popUp = useSelector(state => state.popUp);
+  const [nav, setNav] = useState('');
+  const [row, setRow] = useState(3);
+  const [vWidth, setVWidth] = useState(window.innerWidth);
+  const [navType, setNavType] = useState(null);
+  const [navWidth, setNavWidth] = useState(0);
 
   const onClickBG = () => {
     if(vWidth < 790) {

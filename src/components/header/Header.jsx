@@ -17,17 +17,17 @@ import LoginBtn from '../LoginBtn';
 import Menu from '../Menu';
 export default function Header({ onClickNavIcn }) {
 
-  let theme = useSelector(state => state.theme);
-  let langs = useSelector(state => state.langs);
-  let limit = useSelector(state => state.limit);
-  let location = useSelector(state => state.location);
+  const theme = useSelector(state => state.theme);
+  const langs = useSelector(state => state.langs);
+  const limit = useSelector(state => state.limit);
+  const location = useSelector(state => state.location);
 
-  let [settingMain, setSettingMain] = useState(false);
-  let [isBackward, setIsBackward] = useState(false)
-  let [settingSubType, setSettingSubType] = useState('');
-  let [mode, setMode] = useState(false);
-  let [mainOpened, setMainOpened] = useState(false);
-  let [isSub, setIsSub] = useState(false)
+  const [settingMain, setSettingMain] = useState(false);
+  const [isBackward, setIsBackward] = useState(false)
+  const [settingSubType, setSettingSubType] = useState('');
+  const [mode, setMode] = useState(false);
+  const [mainOpened, setMainOpened] = useState(false);
+  const [isSub, setIsSub] = useState(false)
 
 
   const onClickSetting = () => {

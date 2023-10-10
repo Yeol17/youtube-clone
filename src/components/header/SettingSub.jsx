@@ -20,7 +20,7 @@ export default function SubMenu({
 }) {
 
   let title, desc, contents;
-  let dispatch = useDispatch();
+  const dispatch = useDispatch();
 
   if (settingSubType === 'theme') {
     title = theme.title;

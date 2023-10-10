@@ -33,14 +33,14 @@ export function NavMax({
   onClickNavIcn,
   onClickBG
 }) {
-
-  let location = useLocation();
-  let [page, setPage] = useState(location.pathname);
-  let [login, setLogin] = useState(false);
+  
   let lists;
   let classifiedBySection = []
-  let [fade, setFade] = useState('');
-  let [visible, setVisible] = useState('');
+  const location = useLocation();
+  const [page, setPage] = useState(location.pathname);
+  const [login, setLogin] = useState(false);
+  const [fade, setFade] = useState('');
+  const [visible, setVisible] = useState('');
 
   // i = 2
   // i * 100 <= id < (i+1) * 100
