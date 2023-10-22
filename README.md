@@ -23,11 +23,5 @@
 - 23.06 ~
 - [기록](https://1sy.notion.site/Youtube-3d83a0bcde9240ac9876d99dcc268cf0?pvs=4)
 
-## 목적
-- React의 전반적인 사용법을 익힌다
-- REST API 경험  
-- Redux를 사용해 상태를 관리해 보기  
-- Axios로 비동기 네트워크 요청해 보고 요청 결과를 다루어 화면에 렌더링 
-
 ## 스킬
 - React, Redux, Axios, SCSS
