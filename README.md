@@ -10,7 +10,7 @@
 |---|
 |<img src="https://github.com/Yeol17/youtube-clone/assets/97844334/00e08daa-0de9-437a-a44a-1b27413e335e" width="400px">|
 
-|설정|
+|모달|
 |---|
 |<img src="https://github.com/Yeol17/youtube-clone/assets/97844334/e51076c1-4d9d-4131-8651-cad25958e25d" width="400px">|
 
